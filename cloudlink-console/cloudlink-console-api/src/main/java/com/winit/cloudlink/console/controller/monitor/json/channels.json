@@ -1,0 +1,81 @@
+[
+    {
+        "connection_details": {
+            "name": "172.16.3.164:34431 -> 172.16.3.164:5672", 
+            "peer_port": 34431, 
+            "peer_host": "172.16.3.164"
+        }, 
+        "idle_since": "2016-01-05 22:23:40", 
+        "transactional": false, 
+        "confirm": true, 
+        "consumer_count": 0, 
+        "messages_unacknowledged": 0, 
+        "messages_unconfirmed": 0, 
+        "messages_uncommitted": 0, 
+        "acks_uncommitted": 0, 
+        "prefetch_count": 0, 
+        "global_prefetch_count": 0, 
+        "state": "running", 
+        "node": "rabbit@mqx-n01", 
+        "name": "172.16.3.164:34431 -> 172.16.3.164:5672 (1)", 
+        "number": 1, 
+        "user": "guest", 
+        "vhost": "/"
+    }, 
+    {
+        "connection_details": {
+            "name": "172.16.3.164:39202 -> 172.16.3.164:5672", 
+            "peer_port": 39202, 
+            "peer_host": "172.16.3.164"
+        }, 
+        "message_stats": {
+            "confirm": 1, 
+            "confirm_details": {
+                "rate": 0
+            }, 
+            "publish": 1, 
+            "publish_details": {
+                "rate": 0
+            }
+        }, 
+        "idle_since": "2016-01-12 2:09:06", 
+        "transactional": false, 
+        "confirm": true, 
+        "consumer_count": 0, 
+        "messages_unacknowledged": 0, 
+        "messages_unconfirmed": 0, 
+        "messages_uncommitted": 0, 
+        "acks_uncommitted": 0, 
+        "prefetch_count": 0, 
+        "global_prefetch_count": 0, 
+        "state": "running", 
+        "node": "rabbit@mqx-n01", 
+        "name": "172.16.3.164:39202 -> 172.16.3.164:5672 (1)", 
+        "number": 1, 
+        "user": "guest", 
+        "vhost": "/"
+    }, 
+    {
+        "connection_details": {
+            "name": "172.16.3.166:41077 -> 172.16.3.164:5672", 
+            "peer_port": 41077, 
+            "peer_host": "172.16.3.166"
+        }, 
+        "idle_since": "2016-01-10 4:32:46", 
+        "transactional": false, 
+        "confirm": false, 
+        "consumer_count": 1, 
+        "messages_unacknowledged": 0, 
+        "messages_unconfirmed": 0, 
+        "messages_uncommitted": 0, 
+        "acks_uncommitted": 0, 
+        "prefetch_count": 100, 
+        "global_prefetch_count": 0, 
+        "state": "running", 
+        "node": "rabbit@mqx-n01", 
+        "name": "172.16.3.166:41077 -> 172.16.3.164:5672 (1)", 
+        "number": 1, 
+        "user": "guest", 
+        "vhost": "/"
+    }
+]

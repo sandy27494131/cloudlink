@@ -1,0 +1,74 @@
+<section class="content-header">
+	<h1>&nbsp;</h1>
+	<ol class="breadcrumb">
+		<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i>
+				云链配置</a></li>
+		<li class="active">Shovel管理</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row" ng-controller="shovelControlCtrl">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<button id="btnCheck" type="button" class="btn btn-primary btn-sm pull-right"
+						style="float: right;" data-ng-click="checkShovel()">开始检测</button>
+					<input type="text" class="form-control input-sm"
+						style="width: 200px; display: inline;" data-ng-model="strFil"
+						placeholder="全文索引" />
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="example1" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th colspan="1"></th>
+								<th colspan="6">源端(源队列)</th>
+								<th colspan="6">目的端（shovel）</th>
+							</tr>
+							<tr>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('exceptonShovel')">名称 </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('srcArea')">数据中心 </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('srcQueueExists')">队列<br>是否存在 </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('srcQueueDurable')">队列<br>持久化 </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('srcQueueAutoDelete')">队列<br>自动删除 </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('srcQueueBinding')">队列<br>绑定winit_send </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('srcURIRight')">URI<br>是否正确 </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('destArea')">数据中心 </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('destQueueExists')">Shovel<br>是否存在 </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('destQueueDurable')">Shovel<br>自动删除 </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('destQueueAutoDelete')">Shovel<br>自动确认 </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('destQueueBinding')">Shovel<br>运行状态 </a></th>
+								<th><a href="javascript:void(0);" style="color: black;" data-ng-click="sort('destURIRight')">URI<br>是否正确 </a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr
+								data-ng-repeat="item in datas| filter:strFil | orderBy:orderName:ascOrDesc">
+								<td data-ng-bind="item.shovelName"></td>
+								<td data-ng-bind="item.srcArea"></td>
+								<td data-ng-bind-html="item.srcQueueExists | yesOrNoCheck:item.srcQueueExists"></td>
+								<td data-ng-bind-html="item.srcQueueDurable | yesOrNoCheck:item.srcQueueDurable"></td>
+								<td data-ng-bind-html="item.srcQueueAutoDelete | yesOrNoCheck:!item.srcQueueAutoDelete"></td>
+								<td data-ng-bind-html="item.srcQueueBinding | yesOrNoCheck:item.srcQueueBinding"></td>
+								<td data-ng-bind-html="item.srcURIRight | yesOrNoCheck:item.srcURIRight"></td>
+								<td data-ng-bind="item.destArea"></td>
+								<td data-ng-bind-html="item.shovelExists | yesOrNoCheck:item.shovelExists"></td>
+								<td data-ng-bind-html="!item.neverAutoDelete | yesOrNoCheck:item.neverAutoDelete"></td>
+								<td data-ng-bind-html="item.onConfirm | yesOrNoCheck:item.onConfirm"></td>
+								<td data-ng-bind-html="item.running | yesOrNoCheck:item.running"></td>
+								<td data-ng-bind-html="item.destURIRight | yesOrNoCheck:item.destURIRight"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+	</div>
+
+</section>

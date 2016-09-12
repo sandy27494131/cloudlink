@@ -1,0 +1,58 @@
+<section class="content-header">
+    <h1>&nbsp;</h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i>
+            基础配置</a></li>
+        <li class="active">应用类型配置</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row" ng-controller="appTypeListCtrl">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <button type="button" class="btn btn-primary btn-sm" style="float: left;" data-ng-click="openEditDialog(null,true)">新增</button>
+                    <button type="button" class="btn btn-primary btn-sm pull-right" style="float: right;" data-ng-click="queryAll()"  >查询&刷新</button>
+                    <!--<input type="text" class="form-control input-sm pull-right" style="width:200px;display:inline;  " data-ng-model="queryCode"  placeholder="请输入要查询的系统类型编号" />-->
+                    <input type="text" class="form-control input-sm pull-right" style="width:300px;  display:inline;  " data-ng-model="strFil"  placeholder="全文索引" />
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered table-striped  ">
+                        <thead>
+                        <tr>
+                            <th>
+                                <a href="javascript:void(0);" style="color:black; "   data-ng-click="sort('code')">应用类型
+                                    <span class="glyphicon glyphicon-sort btn-xs"  ></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="javascript:void(0);" style="color:black; " data-ng-click="sort('name')">应用类型名称
+                                    <span class="glyphicon glyphicon-sort btn-xs"  ></span>
+                                </a>
+                            </th>
+                            <th width="100px;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="item in datas | filter:strFil | orderBy:orderName:ascOrDesc">
+                            <td data-ng-bind="item.code"></td>
+                            <td data-ng-bind="item.name"></td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-xs" data-ng-click="openEditDialog(item.code,true)">修改</button>
+                                <button type="button" class="btn btn-danger btn-xs" data-ng-click="delete(item.code,true)">刪除</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+</section>

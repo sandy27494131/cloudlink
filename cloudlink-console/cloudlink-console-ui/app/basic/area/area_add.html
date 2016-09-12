@@ -1,0 +1,107 @@
+<form name="areaForm" ng-submit="save(areaForm.$valid)"
+	autocomplete="off" novalidate>
+	<div class="panel panel-info">
+		<div class="panel-heading" align="center" style="font-weight: bold;">编辑数据中心</div>
+		<table class="table table-hover table-striped table-bordered"
+			style="width: 100%; height: 100%; padding: 0; margin: 0;">
+			<tr>
+				<td width="100%" align="center">
+					<table style="border-spacing: 5px;">
+						<tbody>
+							<tr>
+								<td colspan="2">&nbsp;</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">数据中心编码：</div>
+							<input type="text" name="code" class="form-control input-sm"
+								data-ng-model="area.code" placeholder="" style="width: 270px;"
+								ng-readonly="code" popover popover-show="areaForm.code.$invalid"
+								popover-options='必填项，长度小于32' ng-maxlength='32' required>
+							<div class="input-group-addon"
+								style="width: 600px; text-align: left;">示例：CNR、USR、AUR、EUR</div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">数据中心名称：</div>
+							<input type="text" name="name" class="form-control input-sm"
+								data-ng-model="area.name" placeholder="" style="width: 270px;"
+								popover popover-show="areaForm.name.$invalid"
+								popover-options='必填项，长度必须小于等于32' ng-maxlength='32' required>
+							<div class="input-group-addon"
+								style="width: 600px; text-align: left;">&nbsp;</div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">RabbitMQ消息收发地址：</div>
+							<input type="text" name="mqWanAddr" class="form-control input-sm"
+								data-ng-model="area.mqWanAddr" placeholder=""
+								style="width: 270px;" popover
+								popover-show="areaForm.mqWanAddr.$invalid"
+								popover-options='必填项，长度必须小于等于128；确认数据格式是否正确'
+								ng-pattern="/^amqp://(.)+:(.)+@(.)+:[1-9][0-9]{0,5}$/"
+								ng-maxlength='128' required>
+							<div class="input-group-addon"
+								style="width: 600px; text-align: left;">Shovel（Haproxy/ELB的外网地址）,格式：amqp://username:password@hostname:port</div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">RabbitMQ管理API地址：</div>
+							<input type="text" name="mqMgmtAddr"
+								class="form-control input-sm" data-ng-model="area.mqMgmtAddr"
+								placeholder="" style="width: 270px;" popover
+								popover-show="areaForm.mqMgmtAddr.$invalid"
+								popover-options='必填项，长度必须小于等于128；确认数据格式是否正确'
+								ng-pattern="/^http://(.)+:(.)+@(.)+:[1-9][0-9]{0,5}$/"
+								ng-maxlength='128' required>
+							<div class="input-group-addon"
+								style="width: 600px; text-align: left;">（集群中一台rabbitMq外网地址）,格式：http://username:password@hostname:port</div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">备注：</div>
+							<input type="text" name="remark" class="form-control input-sm"
+								data-ng-model="area.remark" placeholder="" style="width: 870px;"
+								popover popover-show="areaForm.remark.$invalid"
+								popover-options='必填项，长度必须小于等于64' ng-maxlength='128'>
+						</div>
+					</div>
+					<table style="border-spacing: 5px;">
+						<tbody>
+							<tr>
+								<td colspan="2">&nbsp;</td>
+							</tr>
+						</tbody>
+					</table>
+					<table>
+						<tbody>
+							<tr>
+								<td colspan="3" align="center">
+									<button type="button" class="btn btn-info"
+										data-ng-click="returnPage()">返回</button> &nbsp;&nbsp;&nbsp;
+									<button type="submit" id="btnSave" autocomplete="off"
+										data-loading-text="Saving..." class="btn btn-success"
+										data-ng-show="isUpdate">保存</button>
+								</td>
+
+
+							</tr>
+						</tbody>
+					</table>
+
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>

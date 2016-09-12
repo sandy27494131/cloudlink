@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE winit:appid SYSTEM "appid.dtd">
+<winit:appid xmlns:winit="http://com.winit/">
+    <regions>
+        <region>CNR</region>
+        <region>USR</region>
+        <region>EUR</region>
+        <region>AUR</region>
+    </regions>
+    <countries>
+        <country>CN</country>
+        <country>US</country>
+        <country>UK</country>
+        <country>DE</country>
+        <country>AU</country>
+    </countries>
+    <appTypes>
+        <appType>TOM</appType>
+        <appType>OPC</appType>
+        <appType>OMS</appType>
+        <appType>IMS</appType>
+        <appType>TMS</appType>
+        <appType>SMS</appType>
+        <appType>FSP</appType>
+        <appType>FNA</appType>
+        <appType>CWM</appType>
+        <appType>UPS</appType>
+        <appType>MMS</appType>
+        <appType>UMS</appType>
+        <appType>SC</appType>
+        <appType>TP</appType>
+    </appTypes>
+    <appIds>
+        <!--中国区域中心appId列表-->
+        <appId name="TOMCNR" value="TOMCNR.TOM.ALL.CNR" description="中国区管理门户"/>
+        <appId name="OPCCN" value="OPCCN.OPC.CN.CNR" description="中国区中国产品订单中心"/>
+        <appId name="OMSCNR" value="OMSCNR.OMS.ALL.CNR" description="中国区订单管理系统"/>
+        <appId name="IMSCNR" value="IMSCNR.IMS.ALL.CNR" description="中国区库存管理系统"/>
+        <appId name="TMSCNR" value="TMSCNR.TMS.ALL.CNR" description="中国区运输管理系统"/>
+        <appId name="SMSCNR" value="SMSCNR.SMS.ALL.CNR" description="中国区结算管理系统"/>
+        <appId name="FSPCNR" value="FSPCNR.FSP.ALL.CNR" description="中国区金融服务平台"/>
+        <appId name="FNACNR" value="FNACNR.FNA.ALL.CNR" description="中国区财务系统"/>
+        <appId name="CNSHA" value="CNSHA.CWM.CN.CNR" description="上海市闵行区仓库CWM"/>
+        <appId name="CNCAN" value="CNCAN.CWM.CN.CNR" description="广州市白云区仓库CWM"/>
+        <appId name="CNSZX" value="CNSZX.CWM.CN.CNR" description="深圳市龙岗区坂田街道CWM"/>
+        <appId name="CNHKG" value="CNHKG.CWM.CN.CNR" description="香港CWM"/>
+        <appId name="CNTAO" value="CNTAO.CWM.CN.CNR" description="青岛CWM"/>
+        <appId name="CNNGB" value="CNNGB.CWM.CN.CNR" description="宁波CWM"/>
+        <appId name="UPSCNR" value="UPSCNR.UPS.ALL.CNR" description="中国区基础数据系统"/>
+        <appId name="MMSCNR" value="MMSCNR.MMS.ALL.CNR" description="中国区商品管理系统"/>
+        <appId name="UMSCNR" value="UMSCNR.UMS.ALL.CNR" description="中国区用户管理系统"/>
+        <appId name="SCCNR" value="SCCNR.SC.ALL.CNR" description="中国区安全中心"/>
+        <appId name="TPCNR" value="TPCNR.TP.ALL.CNR" description="中国区轨迹平台"/>
+
+        <!--美国区域中心appId列表-->
+        <appId name="TOMUSR" value="TOMUSR.TOM.ALL.USR" description="美国区管理门户"/>
+        <appId name="OPCUS" value="OPCUS.OPC.US.USR" description="美国区美国产品订单中心"/>
+        <appId name="OMSUSR" value="OMSUSR.OMS.ALL.USR" description="美国区订单管理系统"/>
+        <appId name="IMSUSR" value="IMSUSR.OMS.ALL.USR" description="美国区库存管理系统"/>
+        <appId name="TMSUSR" value="TMSUSR.OMS.ALL.USR" description="美国区运输管理系统"/>
+        <appId name="SMSUSR" value="SMSUSR.OMS.ALL.USR" description="美国区结算管理系统"/>
+        <appId name="OMSUSR" value="FSPUSR.OMS.ALL.USR" description="美国区金融服务平台"/>
+        <appId name="MMSUSR" value="MMSUSR.OMS.ALL.USR" description="美国区商品管理系统"/>
+        <appId name="USKY" value="USKY.CWM.US.USR" description="美东肯塔基州仓CWM"/>
+        <appId name="USLA" value="USLA.CWM.US.USR" description="美西加利福尼亚州仓CWM"/>
+        <appId name="UPSUSR" value="UPSUSR.UPS.ALL.USR" description="美国区基础数据系统"/>
+        <appId name="UMSUSR" value="UMSUSR.UMS.ALL.USR" description="美国区用户管理系统"/>
+        <appId name="SCUSR" value="SCUSR.SC.ALL.USR" description="美国区安全中心"/>
+        <appId name="TPUSR" value="TPUSR.TP.ALL.USR" description="美国区轨迹平台"/>
+
+
+        <!--欧洲区域中心appId列表-->
+        <appId name="TOMEUR" value="TOMEUR.TOM.ALL.EUR" description="欧洲区管理门户"/>
+        <appId name="OPCUK" value="OPCUK.OPC.UK.EUR" description="欧洲区英国产品订单中心"/>
+        <appId name="OPCDE" value="OPCDE.OPC.DE.EUR" description="欧洲区德国产品订单中心"/>
+        <appId name="OMSEUR" value="OMSEUR.OMS.ALL.EUR" description="欧洲区订单管理系统"/>
+        <appId name="IMSEUR" value="IMSEUR.OMS.ALL.EUR" description="欧洲区库存管理系统"/>
+        <appId name="TMSEUR" value="TMSEUR.OMS.ALL.EUR" description="欧洲区运输管理系统"/>
+        <appId name="SMSEUR" value="SMSEUR.OMS.ALL.EUR" description="欧洲区结算管理系统"/>
+        <appId name="OMSEUR" value="FSPEUR.OMS.ALL.EUR" description="欧洲区金融服务平台"/>
+        <appId name="MMSEUR" value="MMSEUR.OMS.ALL.EUR" description="欧洲区商品管理系统"/>
+        <appId name="UKLE" value="UKLE.CWM.UK.EUR" description="英国1仓莱斯特郡CWM"/>
+        <appId name="UKMA" value="UKMA.CWM.UK.EUR" description="英国2仓曼彻斯特郡CWM"/>
+        <appId name="DEBRE" value="DEBRE.CWM.DE.EUR" description="德国不来梅州库CWM"/>
+        <appId name="UPSEUR" value="UPSEUR.UPS.ALL.EUR" description="欧洲区基础数据系统"/>
+        <appId name="UMSEUR" value="UMSEUR.UMS.ALL.EUR" description="欧洲区用户管理系统"/>
+        <appId name="SCEUR" value="SCEUR.SC.ALL.EUR" description="欧洲区安全中心"/>
+        <appId name="TPEUR" value="TPEUR.TP.ALL.EUR" description="欧洲区轨迹平台"/>
+
+
+        <!--澳洲区域中心appId列表-->
+        <appId name="TOMAUR" value="TOMAUR.TOM.ALL.AUR" description="澳洲区管理门户"/>
+        <appId name="OPCAU" value="OPCAU.OPC.AU.AUR" description="澳洲区澳大利亚产品订单中心"/>
+        <appId name="OMSAUR" value="OMSAUR.OMS.ALL.AUR" description="澳洲区订单管理系统"/>
+        <appId name="IMSAUR" value="IMSAUR.OMS.ALL.AUR" description="澳洲区库存管理系统"/>
+        <appId name="TMSAUR" value="TMSAUR.OMS.ALL.AUR" description="澳洲区运输管理系统"/>
+        <appId name="SMSAUR" value="SMSAUR.OMS.ALL.AUR" description="澳洲区结算管理系统"/>
+        <appId name="OMSAUR" value="FSPAUR.OMS.ALL.AUR" description="澳洲区金融服务平台"/>
+        <appId name="MMSAUR" value="MMSAUR.OMS.ALL.AUR" description="澳洲区商品管理系统"/>
+        <appId name="AAUYD" value="AAUYD.CWM.AU.AUR" description="澳洲新南威尔士州CWM"/>
+        <appId name="UPSAUR" value="UPSAUR.UPS.ALL.AUR" description="澳洲区基础数据系统"/>
+        <appId name="UMSAUR" value="UMSAUR.UMS.ALL.AUR" description="澳洲区用户管理系统"/>
+        <appId name="SCAUR" value="SCAUR.SC.ALL.AUR" description="澳洲区安全中心"/>
+        <appId name="TPAUR" value="TPAUR.TP.ALL.AUR" description="澳洲区轨迹平台"/>
+    </appIds>
+</winit:appid>

@@ -1,0 +1,96 @@
+!!Manifest
+bindings:
+- arguments: {}
+  destination: apps
+  destinationType: e
+  routingKey: null
+  source: entry
+  vhost: /
+- arguments: {}
+  destination: users
+  destinationType: e
+  routingKey: null
+  source: entry
+  vhost: /
+- arguments: {}
+  destination: app1
+  destinationType: q
+  routingKey: security.events.#
+  source: apps
+  vhost: /
+- arguments: {}
+  destination: app1
+  destinationType: q
+  routingKey: search.events.#
+  source: apps
+  vhost: /
+- arguments: {}
+  destination: app2
+  destinationType: q
+  routingKey: db.events.#
+  source: apps
+  vhost: /
+- arguments: {}
+  destination: app2
+  destinationType: q
+  routingKey: mgmt.events.#
+  source: apps
+  vhost: /
+- arguments: {TO: johndoe, x-match: all}
+  destination: johndoe
+  destinationType: q
+  routingKey: null
+  source: users
+  vhost: /
+- arguments: {TO: janedoe, x-match: all}
+  destination: janedoe
+  destinationType: q
+  routingKey: null
+  source: users
+  vhost: /
+connectionInfo: {hostname: localhost, keystore: null, keystorePassword: null, password: guest,
+  port: 15672, truststore: null, truststorePassword: null, username: guest}
+exchanges:
+- {arguments: null, autoDelete: false, durable: false, internal: false, name: entry,
+  type: fanout, vhost: /}
+- {arguments: null, autoDelete: false, durable: false, internal: false, name: apps,
+  type: topic, vhost: /}
+- {arguments: null, autoDelete: false, durable: false, internal: false, name: users,
+  type: headers, vhost: /}
+permissions:
+- {configure: ^$, read: app1, user: app1, vhost: /, write: entry}
+- {configure: ^$, read: app2, user: app2, vhost: /, write: entry}
+- {configure: ^$, read: johndoe, user: johndoe, vhost: /, write: entry}
+- {configure: ^$, read: janedoe, user: janedoe, vhost: /, write: entry}
+queues:
+- arguments: {}
+  autoDelete: false
+  durable: false
+  name: app1
+  policy: null
+  vhost: /
+- arguments: {}
+  autoDelete: false
+  durable: false
+  name: app2
+  policy: null
+  vhost: /
+- arguments: {}
+  autoDelete: false
+  durable: false
+  name: johndoe
+  policy: null
+  vhost: /
+- arguments: {}
+  autoDelete: false
+  durable: false
+  name: janedoe
+  policy: null
+  vhost: /
+users:
+- {name: admin, password: password, tags: administrator}
+- {name: app1, password: password, tags: service}
+- {name: app2, password: password, tags: service}
+- {name: johndoe, password: password, tags: user}
+- {name: janedoe, password: password, tags: user}
+vhosts: []

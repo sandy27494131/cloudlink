@@ -1,0 +1,228 @@
+{
+    "connection_details": {
+        "name": "172.16.2.182:51072 -> 172.16.3.166:5672", 
+        "peer_port": 51072, 
+        "peer_host": "172.16.2.182"
+    }, 
+    "publishes": [ ], 
+    "deliveries": [ ], 
+    "consumer_details": [
+        {
+            "channel_details": {
+                "name": "172.16.2.182:51072 -> 172.16.3.166:5672 (2)", 
+                "number": 2, 
+                "user": "guest", 
+                "connection_name": "172.16.2.182:51072 -> 172.16.3.166:5672", 
+                "peer_port": 51072, 
+                "peer_host": "172.16.2.182"
+            }, 
+            "queue": {
+                "name": "ims_item_channel_CMD.IMS1.IMS.ALL.CNR", 
+                "vhost": "/"
+            }, 
+            "consumer_tag": "amq.ctag-5Huho6yJo7Tk918ElZFaNQ", 
+            "exclusive": false, 
+            "ack_required": true, 
+            "prefetch_count": 1, 
+            "arguments": { }
+        }
+    ], 
+    "message_stats": {
+        "ack": 31, 
+        "ack_details": {
+            "rate": 0, 
+            "samples": [
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993625000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993620000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993615000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993610000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993605000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993600000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993595000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993590000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993585000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993580000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993575000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993570000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993565000
+                }
+            ], 
+            "avg_rate": 0, 
+            "avg": 31
+        }, 
+        "deliver": 31, 
+        "deliver_details": {
+            "rate": 0, 
+            "samples": [
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993625000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993620000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993615000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993610000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993605000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993600000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993595000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993590000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993585000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993580000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993575000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993570000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993565000
+                }
+            ], 
+            "avg_rate": 0, 
+            "avg": 31
+        }, 
+        "deliver_get": 31, 
+        "deliver_get_details": {
+            "rate": 0, 
+            "samples": [
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993625000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993620000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993615000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993610000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993605000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993600000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993595000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993590000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993585000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993580000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993575000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993570000
+                }, 
+                {
+                    "sample": 31, 
+                    "timestamp": 1452993565000
+                }
+            ], 
+            "avg_rate": 0, 
+            "avg": 31
+        }
+    }, 
+    "idle_since": "2016-01-16 7:31:13", 
+    "transactional": false, 
+    "confirm": false, 
+    "consumer_count": 1, 
+    "messages_unacknowledged": 0, 
+    "messages_unconfirmed": 0, 
+    "messages_uncommitted": 0, 
+    "acks_uncommitted": 0, 
+    "prefetch_count": 1, 
+    "global_prefetch_count": 0, 
+    "state": "running", 
+    "node": "rabbit@mqx-n03", 
+    "name": "172.16.2.182:51072 -> 172.16.3.166:5672 (2)", 
+    "number": 2, 
+    "user": "guest", 
+    "vhost": "/"
+}

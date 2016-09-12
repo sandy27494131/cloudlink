@@ -1,0 +1,20 @@
+[
+    {
+        "source": "", 
+        "vhost": "/", 
+        "destination": "CHECK_CMD.CNSZX.CWM.CN.CNR", 
+        "destination_type": "queue", 
+        "routing_key": "CHECK_CMD.CNSZX.CWM.CN.CNR", 
+        "arguments": { }, 
+        "properties_key": "CHECK_CMD.CNSZX.CWM.CN.CNR"
+    }, 
+    {
+        "source": "winit_receive", 
+        "vhost": "/", 
+        "destination": "CHECK_CMD.CNSZX.CWM.CN.CNR", 
+        "destination_type": "queue", 
+        "routing_key": "CHECK_CMD.CNSZX.CWM.CN.CNR", 
+        "arguments": { }, 
+        "properties_key": "CHECK_CMD.CNSZX.CWM.CN.CNR"
+    }
+]

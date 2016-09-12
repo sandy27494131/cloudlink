@@ -1,0 +1,551 @@
+{
+    "memory": 22296, 
+    "message_stats": {
+        "ack": 73, 
+        "ack_details": {
+            "rate": 0, 
+            "samples": [
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987765000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987760000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987755000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987750000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987745000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987740000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987735000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987730000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987725000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987720000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987715000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987710000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987705000
+                }
+            ], 
+            "avg_rate": 0, 
+            "avg": 73
+        }, 
+        "deliver": 73, 
+        "deliver_details": {
+            "rate": 0, 
+            "samples": [
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987765000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987760000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987755000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987750000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987745000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987740000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987735000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987730000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987725000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987720000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987715000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987710000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987705000
+                }
+            ], 
+            "avg_rate": 0, 
+            "avg": 73
+        }, 
+        "deliver_get": 73, 
+        "deliver_get_details": {
+            "rate": 0, 
+            "samples": [
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987765000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987760000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987755000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987750000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987745000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987740000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987735000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987730000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987725000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987720000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987715000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987710000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987705000
+                }
+            ], 
+            "avg_rate": 0, 
+            "avg": 73
+        }, 
+        "disk_writes": 73, 
+        "disk_writes_details": {
+            "rate": 0, 
+            "samples": [
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987765000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987760000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987755000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987750000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987745000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987740000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987735000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987730000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987725000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987720000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987715000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987710000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987705000
+                }
+            ], 
+            "avg_rate": 0, 
+            "avg": 73
+        }, 
+        "publish": 73, 
+        "publish_details": {
+            "rate": 0, 
+            "samples": [
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987765000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987760000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987755000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987750000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987745000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987740000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987735000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987730000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987725000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987720000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987715000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987710000
+                }, 
+                {
+                    "sample": 73, 
+                    "timestamp": 1452987705000
+                }
+            ], 
+            "avg_rate": 0, 
+            "avg": 73
+        }
+    }, 
+    "messages": 0, 
+    "messages_details": {
+        "rate": 0, 
+        "samples": [
+            {
+                "sample": 0, 
+                "timestamp": 1452987770000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987765000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987760000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987755000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987750000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987745000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987740000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987735000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987730000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987725000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987720000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987715000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987710000
+            }
+        ], 
+        "avg_rate": 0, 
+        "avg": 0
+    }, 
+    "messages_ready": 0, 
+    "messages_ready_details": {
+        "rate": 0, 
+        "samples": [
+            {
+                "sample": 0, 
+                "timestamp": 1452987770000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987765000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987760000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987755000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987750000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987745000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987740000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987735000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987730000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987725000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987720000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987715000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987710000
+            }
+        ], 
+        "avg_rate": 0, 
+        "avg": 0
+    }, 
+    "messages_unacknowledged": 0, 
+    "messages_unacknowledged_details": {
+        "rate": 0, 
+        "samples": [
+            {
+                "sample": 0, 
+                "timestamp": 1452987770000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987765000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987760000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987755000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987750000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987745000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987740000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987735000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987730000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987725000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987720000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987715000
+            }, 
+            {
+                "sample": 0, 
+                "timestamp": 1452987710000
+            }
+        ], 
+        "avg_rate": 0, 
+        "avg": 0
+    }, 
+    "idle_since": "2016-01-16 8:25:07", 
+    "consumer_utilisation": "", 
+    "policy": "", 
+    "exclusive_consumer_tag": "", 
+    "consumers": 1, 
+    "recoverable_slaves": "", 
+    "state": "running", 
+    "messages_ram": 0, 
+    "messages_ready_ram": 0, 
+    "messages_unacknowledged_ram": 0, 
+    "messages_persistent": 0, 
+    "message_bytes": 0, 
+    "message_bytes_ready": 0, 
+    "message_bytes_unacknowledged": 0, 
+    "message_bytes_ram": 0, 
+    "message_bytes_persistent": 0, 
+    "disk_reads": 0, 
+    "disk_writes": 73, 
+    "backing_queue_status": {
+        "q1": 0, 
+        "q2": 0, 
+        "delta": [
+            "delta", 
+            0, 
+            0, 
+            0
+        ], 
+        "q3": 0, 
+        "q4": 0, 
+        "len": 0, 
+        "target_ram_count": "infinity", 
+        "next_seq_id": 73, 
+        "avg_ingress_rate": 0.0007105345834763955, 
+        "avg_egress_rate": 0.0007105345834763955, 
+        "avg_ack_ingress_rate": 0.0007105345834763955, 
+        "avg_ack_egress_rate": 0.0007105345834763955
+    }, 
+    "incoming": [ ], 
+    "deliveries": [ ], 
+    "consumer_details": [
+        {
+            "channel_details": {
+                "name": "172.16.2.182:24920 -> 172.16.3.166:5672 (3)", 
+                "number": 3, 
+                "user": "guest", 
+                "connection_name": "172.16.2.182:24920 -> 172.16.3.166:5672", 
+                "peer_port": 24920, 
+                "peer_host": "172.16.2.182"
+            }, 
+            "queue": {
+                "name": "CHECK_CMD.CNSZX.CWM.CN.CNR", 
+                "vhost": "/"
+            }, 
+            "consumer_tag": "amq.ctag-DVvY_arLNGL6fBx4KMhxHg", 
+            "exclusive": false, 
+            "ack_required": true, 
+            "prefetch_count": 1, 
+            "arguments": { }
+        }
+    ], 
+    "name": "CHECK_CMD.CNSZX.CWM.CN.CNR", 
+    "vhost": "/", 
+    "durable": true, 
+    "auto_delete": false, 
+    "arguments": { }, 
+    "node": "rabbit@mqx-n03"
+}

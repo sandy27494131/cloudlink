@@ -1,0 +1,39 @@
+ [{
+        "message_stats": {
+            "confirm": 1, 
+            "confirm_details": {
+                "rate": 0
+            }, 
+            "publish_in": 1, 
+            "publish_in_details": {
+                "rate": 0
+            }
+        }, 
+        "name": "winit_receive", 
+        "vhost": "/", 
+        "type": "direct", 
+        "durable": true, 
+        "auto_delete": false, 
+        "internal": false, 
+        "arguments": { }
+    }, 
+    {
+        "message_stats": {
+            "publish_in": 95, 
+            "publish_in_details": {
+                "rate": 0
+            }, 
+            "publish_out": 95, 
+            "publish_out_details": {
+                "rate": 0
+            }
+        }, 
+        "name": "winit_send", 
+        "vhost": "/", 
+        "type": "topic", 
+        "durable": true, 
+        "auto_delete": false, 
+        "internal": false, 
+        "arguments": { }
+    }
+]

@@ -1,0 +1,165 @@
+{
+    "recv_oct": 41195, 
+    "recv_oct_details": {
+        "rate": 0, 
+        "samples": [
+            {
+                "sample": 41195, 
+                "timestamp": 1453000810000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000805000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000800000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000795000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000790000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000785000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000780000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000775000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000770000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000765000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000760000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000755000
+            }, 
+            {
+                "sample": 41195, 
+                "timestamp": 1453000750000
+            }
+        ], 
+        "avg_rate": 0, 
+        "avg": 41195
+    }, 
+    "send_oct": 21511, 
+    "send_oct_details": {
+        "rate": 0, 
+        "samples": [
+            {
+                "sample": 21511, 
+                "timestamp": 1453000810000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000805000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000800000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000795000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000790000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000785000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000780000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000775000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000770000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000765000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000760000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000755000
+            }, 
+            {
+                "sample": 21511, 
+                "timestamp": 1453000750000
+            }
+        ], 
+        "avg_rate": 0, 
+        "avg": 21511
+    }, 
+    "recv_cnt": 544, 
+    "send_cnt": 344, 
+    "send_pend": 0, 
+    "state": "running", 
+    "channels": 10, 
+    "type": "network", 
+    "node": "rabbit@mqx-n03", 
+    "name": "172.16.2.182:24920 -> 172.16.3.166:5672", 
+    "port": 5672, 
+    "peer_port": 24920, 
+    "host": "172.16.3.166", 
+    "peer_host": "172.16.2.182", 
+    "ssl": false, 
+    "peer_cert_subject": "", 
+    "peer_cert_issuer": "", 
+    "peer_cert_validity": "", 
+    "auth_mechanism": "PLAIN", 
+    "ssl_protocol": "", 
+    "ssl_key_exchange": "", 
+    "ssl_cipher": "", 
+    "ssl_hash": "", 
+    "protocol": "AMQP 0-9-1", 
+    "user": "guest", 
+    "vhost": "/", 
+    "timeout": 580, 
+    "frame_max": 131072, 
+    "channel_max": 0, 
+    "client_properties": {
+        "product": "RabbitMQ", 
+        "information": "Licensed under the MPL. See http://www.rabbitmq.com/", 
+        "platform": "Java", 
+        "capabilities": {
+            "exchange_exchange_bindings": true, 
+            "authentication_failure_close": true, 
+            "consumer_cancel_notify": true, 
+            "basic.nack": true, 
+            "publisher_confirms": true, 
+            "connection.blocked": true
+        }, 
+        "copyright": "Copyright (C) 2007-2015 Pivotal Software, Inc.", 
+        "version": "3.5.6"
+    }, 
+    "connected_at": 1452899109499
+}

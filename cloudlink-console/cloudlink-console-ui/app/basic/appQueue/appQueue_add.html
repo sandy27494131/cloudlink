@@ -1,0 +1,111 @@
+<form name="queueForm" ng-submit="save(queueForm.$valid)"
+	autocomplete="off" novalidate>
+	<div class="panel panel-info">
+		<div class="panel-heading" align="center" style="font-weight: bold;">配置指令、消息</div>
+		<table class="table table-hover table-striped table-bordered"
+			style="width: 100%; height: 100%; padding: 0; margin: 0;">
+			<tr>
+				<td width="100%" align="center">
+					<table style="border-spacing: 5px;">
+						<tbody>
+							<tr>
+								<td colspan="2">&nbsp;</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">（指令/消息）名称：</div>
+							<input type="text" name="name" class="form-control input-sm"
+								data-ng-model="data.name" placeholder="" style="width: 270px;"
+								ng-readonly="queueName" popover
+								popover-show="queueForm.name.$invalid"
+								popover-options='必填项，长度必须小于等于32' ng-maxlength='32' required>
+							<div class="input-group-addon"
+								style="width: 600px; text-align: left;">示例：PICKUP</div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">类型(指令/消息)：</div>
+							<select class="form-control" style="width: 270px;"
+								name="messageType" data-ng-model="data.messageType" popover
+								popover-show="queueForm.messageType.$invalid"
+								popover-options='必填项' required>
+								<option selected="selected" label="指令" value="COMMAND"></option>
+								<option label="消息" value="MESSAGE"></option>
+							</select>
+							<div class="input-group-addon"
+								style="width: 600px; text-align: left;">指令：COMMAND；消息：MESSAGE</div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">发送方（应用类型）：</div>
+							<select class="form-control" style="width: 270px;" name="sender"
+								data-ng-model="data.sender" popover
+								popover-show="queueForm.sender.$invalid" popover-options='必填项'
+								required>
+								<option data-ng-repeat="item in appTypes" label="{{item.code}}"
+									value="{{item.code}}"></option>
+							</select>
+							<div class="input-group-addon"
+								style="width: 600px; text-align: left;">&nbsp;</div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">接收方（应用类型）：</div>
+							<select class="form-control" style="width: 270px;"
+								name="receiver" data-ng-model="data.receiver" popover
+								popover-show="queueForm.receiver.$invalid" popover-options='必填项'
+								required>
+								<option data-ng-repeat="item in appTypes" label="{{item.code}}"
+									value="{{item.code}}"></option>
+							</select>
+							<div class="input-group-addon"
+								style="width: 600px; text-align: left;"></div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">备注：</div>
+							<input type="text" name="remark" class="form-control input-sm"
+								data-ng-model="data.remark" placeholder="" style="width: 870px;"
+								popover popover-show="queueForm.remark.$invalid"
+								popover-options='必填项，长度小于64' ng-maxlength='64'>
+						</div>
+					</div>
+					<table style="border-spacing: 5px;">
+						<tbody>
+							<tr>
+								<td colspan="2">&nbsp;</td>
+							</tr>
+						</tbody>
+					</table>
+					<table>
+						<tbody>
+							<tr>
+								<td colspan="3" align="center">
+									<button type="button" class="btn btn-info"
+										data-ng-click="returnPage()">返回</button> &nbsp;&nbsp;&nbsp;
+									<button type="submit" id="btnSave" autocomplete="off"
+										data-loading-text="Saving..." class="btn btn-success"
+										data-ng-show="isUpdate">保存</button>
+								</td>
+
+
+							</tr>
+						</tbody>
+					</table>
+
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>

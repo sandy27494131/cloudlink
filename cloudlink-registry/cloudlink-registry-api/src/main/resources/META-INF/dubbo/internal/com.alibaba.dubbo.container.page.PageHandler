@@ -1,0 +1,3 @@
+registries=RegistriesPageHandler
+registered=RegisteredPageHandler
+subscribed=SubscribedPageHandler

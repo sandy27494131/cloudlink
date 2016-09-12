@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+<head>
+<title>Cloudlink</title>
+<meta charset="utf-8" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css"
+	type="text/css" />
+<link rel="stylesheet"
+	href="plugins/bootstrap/css/bootstrap-theme.min.css" type="text/css" />
+<link rel="stylesheet" href="plugins/assets/animate.css/animate.css"
+	type="text/css" />
+<link rel="stylesheet"
+	href="plugins/assets/font-awesome/css/font-awesome.min.css"
+	type="text/css" />
+<link rel="stylesheet"
+	href="plugins/assets/simple-line-icons/css/simple-line-icons.css"
+	type="text/css" />
+<!-- Theme style -->
+<link rel="stylesheet" href="plugins/dist/css/AdminLTE.min.css"
+	type="text/css" />
+<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="plugins/dist/css/skins/_all-skins.min.css"
+	type="text/css" />
+<link rel="stylesheet" href="css/app.css" type="text/css" />
+
+</head>
+<body class="skin-blue sidebar-mini" style="font-family: 微软雅黑;"
+	ng-controller="AppCtrl" data-ng-cloak>
+
+	<div class="wrapper">
+		<!-- navbar -->
+		<div data-ng-include=" '../app/common/layout/header.html' "></div>
+		<!-- Left side column. contains the logo and sidebar -->
+		<!-- menu -->
+		<div data-ng-include=" '../app/common/layout/left-sidebar.html' "></div>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<div class="app" id="app"
+				ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}"
+				ui-view></div>
+		</div>
+		<!-- /.content-wrapper -->
+
+		<div data-ng-include=" '../app/common/layout/footer.html' "></div>
+
+		<!-- Control Sidebar -->
+		<div data-ng-include=" '../app/common/layout/right-sidebar.html' "></div>
+		<!-- /.control-sidebar -->
+		<!-- Add the sidebar's background. This div must be placed
+		         immediately after the control sidebar -->
+		<div class="control-sidebar-bg"></div>
+
+	</div>
+
+	<script src="plugins/jquery/jquery.js"></script>
+	<script src="plugins/jquery/jquery.cookie.js"></script>
+	<script src="js/config.cookie.js"></script>
+	<script type="text/javascript">QueryString_Initial()</script>
+	<script src="plugins/browser/jquery.browser.min.js"></script>
+
+	<!-- Angular -->
+	<script src="plugins/angular/angular.js"></script>
+
+	<script src="plugins/angular/angular-animate.js"></script>
+	<script src="plugins/angular/angular-aria.js"></script>
+	<script src="plugins/angular/angular-cookies.js"></script>
+	<script src="plugins/angular/angular-messages.js"></script>
+	<script src="plugins/angular/angular-resource.js"></script>
+	<script src="plugins/angular/angular-sanitize.js"></script>
+	<script src="plugins/angular/angular-touch.js"></script>
+
+	<script src="plugins/angular/angular-ui-router/angular-ui-router.js"></script>
+	<script src="plugins/angular/ngstorage/ngStorage.js"></script>
+	<script src="plugins/angular/angular-ui-utils/ui-utils.js"></script>
+
+	<!-- bootstrap -->
+	<script src="plugins/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<!-- lazyload -->
+	<script src="plugins/angular/oclazyload/dist/ocLazyLoad.js"></script>
+	<!-- translate -->
+	<script src="plugins/angular/angular-translate/angular-translate.js"></script>
+	<script
+		src="plugins/angular/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+	<script
+		src="plugins/angular/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+	<script
+		src="plugins/angular/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+
+	<!-- bootstrap3.3.5 -->
+	<script src="plugins/bootstrap/js/bootstrap.min.js"
+		type="text/javascript"></script>
+	<!--highcharts-->
+	<script src="plugins/highcharts-4.1.8/js/highcharts.js"></script>
+	<script src="plugins/highcharts-4.1.8/js/highcharts-more.js"></script>
+	<script src="plugins/highcharts-ng/dist/highcharts-ng.js"></script>
+	<!-- App -->
+	<script src="js/config.directive.js"></script>
+	<script src="js/config.filter.js"></script>
+
+	<script src="js/config.api.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/config.lazyload.js"></script>
+	<script src="js/config.service.js"></script>
+	<script src="js/config.router.js"></script>
+	<script src="js/main.js"></script>
+	<!-- Lazy loading aaa-->
+</body>
+</html>

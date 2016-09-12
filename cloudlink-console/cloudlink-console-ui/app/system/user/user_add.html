@@ -1,0 +1,84 @@
+<form name="userForm" ng-submit="save(userForm.$valid)"
+	autocomplete="off" novalidate>
+	<div class="panel panel-info">
+		<div class="panel-heading" align="center" style="font-weight: bold;">编辑用户</div>
+		<table class="table table-hover table-striped table-bordered"
+			style="width: 100%; height: 100%; padding: 0; margin: 0;">
+			<tr>
+				<td width="100%" align="center">
+					<table style="border-spacing: 5px;">
+						<tbody>
+							<tr>
+								<td colspan="2">&nbsp;</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">用户名：</div>
+							<input type="text" name="username" class="form-control input-sm"
+								data-ng-model="data.username" placeholder=""
+								style="width: 270px;" ng-readonly="username" popover
+								popover-show="userForm.username.$invalid"
+								popover-options='必填项，长度小于等于16' ng-maxlength='16' required>
+							<div class="input-group-addon"
+								style="width: 600px; text-align: left;">&nbsp;</div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 5px;">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">密码：</div>
+							<input type="password" name="password" class="form-control input-sm"
+								data-ng-model="data.password" placeholder=""
+								style="width: 270px;" popover
+								popover-show="userForm.password.$invalid"
+								popover-options='必填项，长度必须小于等于16' ng-maxlength='16' required>
+							<div class="input-group-addon"
+								style="width: 600px; text-align: left;">&nbsp;</div>
+						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 5px;" data-ng-show="data.username!='admin'">
+						<div class="input-group">
+							<div class="input-group-addon"
+								style="width: 280px; text-align: right;">角色：</div>
+							<div class="input-group-addon"
+								style="width: 870px; text-align: left;">
+								<div data-ng-repeat="role in roles track by $index"
+									style="display: inline-block; margin-right: 15px;margin-top: 5px;">
+									<label> <input type="checkbox" name="roleName"
+										value="{{role}}"> {{role}}
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<table style="border-spacing: 5px;">
+						<tbody>
+							<tr>
+								<td colspan="2">&nbsp;</td>
+							</tr>
+						</tbody>
+					</table>
+					<table>
+						<tbody>
+							<tr>
+								<td colspan="3" align="center">
+									<button type="button" class="btn btn-info"
+										data-ng-click="returnPage()">返回</button> &nbsp;&nbsp;&nbsp;
+									<button type="submit" id="btnSave" autocomplete="off"
+										data-loading-text="Saving..." class="btn btn-success"
+										data-ng-show="isUpdate">保存</button>
+								</td>
+
+
+							</tr>
+						</tbody>
+					</table>
+
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>

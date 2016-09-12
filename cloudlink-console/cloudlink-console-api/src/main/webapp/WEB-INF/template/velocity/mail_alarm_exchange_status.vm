@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+<h1>以下数据中心的Exchange配置错误：</h1>
+
+<table  border="1">
+    <thead>
+    <tr>
+        <th></th>
+        <th colspan="4">winit_send</th>
+        <th colspan="4">winit_receive</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th> 数据中心 </th>
+        <th> 是否存在 </th>
+        <th> 是否持久化 </th>
+        <th> 是否自动删除 </th>
+        <th> 类型 </th>
+        <th> 是否存在 </th>
+        <th> 是否持久化 </th>
+        <th> 是否自动删除 </th>
+        <th> 类型 </th>
+        <th> 是否绑定 </th>
+    </tr>
+    </thead>
+    <tbody>
+        #foreach($obj in $info)
+        <tr  >
+            <td style="vertical-align: middle;" >$obj.areaCode </td>
+            <td style="vertical-align: middle;" >
+                #if($obj.winitSendExist)
+                    是$obj.winitSendExist
+                #else
+                    <span style="color:red;">否 </span>
+                #end
+            </td>
+            <td style="vertical-align: middle;" >
+                #if($obj.winitSendDurable)
+                    是
+                #else
+                    <span style="color:red;">否</span>
+                #end
+            </td>
+            <td style="vertical-align: middle;" >
+                #if($obj.winitSendAutoDelete)
+                    <span style="color:red;">是</span>
+                #else
+                    否
+                #end
+            </td>
+            <td style="vertical-align: middle;" >
+
+                #if(!$obj.winitSendType)
+                    /
+                #elseif($obj.winitSendType=='topic')
+                    $obj.winitSendType
+                #else
+                    <span style="color:red;">$obj.winitSendType</span>
+                #end
+
+            </td>
+            <td style="vertical-align: middle;" >
+                #if($obj.winitReceiveExist)
+                    是
+                #else
+                    <span style="color:red;">否</span>
+                #end
+            </td>
+            <td style="vertical-align: middle;" >
+                #if($obj.winitReceiveDurable)
+                    是
+                #else
+                    <span style="color:red;">否</span>
+                #end
+            </td>
+            <td style="vertical-align: middle;" >
+                #if($obj.winitReceiveAutoDelete)
+                    <span style="color:red;">是</span>
+                #else
+                    否
+                #end
+            </td>
+            <td style="vertical-align: middle;" >
+                #if(!$obj.winitReceiveType)
+                    /
+                #elseif($obj.winitReceiveType=='direct')
+                    $obj.winitReceiveType
+                #else
+                    <span style="color:red;">$obj.winitReceiveType</span>
+                #end
+            </td>
+            <td style="vertical-align: middle;" >
+                #if($obj.binding )
+                    是
+                #else
+                    <span style="color:red;">否</span>
+                #end
+            </td>
+        </tr>
+        #end
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cmdOptions=$@
+
+mvn exec:java -Dexec.mainClass="ManifestLoader" -Dexec.args="${cmdOptions}"

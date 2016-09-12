@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+</head>
+<body>
+	<h1>以下数据中心的RabbitMQ无法正常收发消息：</h1>
+	<table border="1" width="90%">
+		<tr>
+			<td>数据中心编号</td>
+			<td>数据中心名称</td>
+			<td>RabbitMQ访问地址</td>
+		</tr>
+		#foreach($param in ${info.keySet()})
+		<tr>
+			#foreach($li in ${info.get($param)})
+			<td style="width:200px;">${li}</td>
+			#end
+		</tr>
+		#end
+	</table>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<section class="content-header">
+	<h1>&nbsp;</h1>
+	<ol class="breadcrumb">
+		<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i>
+				云链监控</a></li>
+		<li class="active">Queues监控</li>
+	</ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+	<div class="row" ng-controller="queueListMonitorCtrl">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<div class="row">
+						<div class="col-xs-2 col-md-2">
+							<input type="text" class="form-control input-sm"
+								style="display: inline;" data-ng-model="strFil"
+								placeholder="全文索引" />
+						</div>
+						<div class="col-xs-6 col-md-6">
+							<div class="form-horizontal col-sm-offset-1">
+								<label class="checkbox-inline">数据中心</label> <label
+									class="checkbox-inline"
+									data-ng-repeat="area in areas track by $index"> <input
+									type="radio" name="area" value="{{area.code}}"
+									ng-value="area.code" data-ng-click="areaClick(this )">
+									{{area.code}}
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-4 col-md-4">
+							<select data-ng-model="refreshTime" id="refreshTime" class="input-sm"
+								name="refreshTime" ng-change="changeRefreshTime()"
+								style="float: right;" ng-options="option.value as option.label for option in $root.configs.monitorRefreshCycle">
+							</select>
+							<div class="input-group input-group-sm"
+								style="width: 200px; float: right; padding-right: 10px;">
+								<div class="input-group-btn">
+									<button type="button" class="btn" data-ng-bind="'Total : '+page.total+', limit : '"></button>
+								</div>
+								<!-- /btn-group -->
+								<input type="number" class="form-control" tabindex="2"
+									data-ng-model="page.pageSize" style="width: 80px;">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="example1" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th><a href="javascript:void(0);" style="color: black;"
+									data-ng-click="sort('name')">Name <span
+										class="glyphicon glyphicon-sort btn-xs"></span>
+								</a></th>
+								<th><a href="javascript:void(0);" style="color: black;"
+									data-ng-click="sort('state')">State <span
+										class="glyphicon glyphicon-sort btn-xs"></span>
+								</a></th>
+								<th><a href="javascript:void(0);" style="color: black;"
+									data-ng-click="sort('src_uri')">Features <span
+										class="glyphicon glyphicon-sort btn-xs"></span>
+								</a></th>
+								<th><a href="javascript:void(0);" style="color: black;"
+									data-ng-click="sort('messages_ready')">ready <span
+										class="glyphicon glyphicon-sort btn-xs"></span>
+								</a></th>
+								<th><a href="javascript:void(0);" style="color: black;"
+									data-ng-click="sort('messages_unacknowledged')">Unacked <span
+										class="glyphicon glyphicon-sort btn-xs"></span>
+								</a></th>
+								<th><a href="javascript:void(0);" style="color: black;"
+									data-ng-click="sort('messages_ready','messages_unacknowledged')">Total
+										<span class="glyphicon glyphicon-sort btn-xs"></span>
+								</a></th>
+								<th><a href="javascript:void(0);" style="color: black;"
+									data-ng-click="sort('message_stats.publish_details.rate')">incoming
+										<span class="glyphicon glyphicon-sort btn-xs"></span>
+								</a></th>
+								<th><a href="javascript:void(0);" style="color: black;"
+									data-ng-click="sort('message_stats.deliver_get_details.rate')">deliver
+										/ get <span class="glyphicon glyphicon-sort btn-xs"></span>
+								</a></th>
+								<th><a href="javascript:void(0);" style="color: black;"
+									data-ng-click="sort('message_stats.ack_details.rate')">ack
+										<span class="glyphicon glyphicon-sort btn-xs"></span>
+								</a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr
+								data-ng-repeat="item in datas | filter:strFil | orderBy:orderName:ascOrDesc | limitTo:page.pageSize">
+								<td style="vertical-align: middle;"><a href="#/app/monitor/queue/{{selectedArea}}/{{item.name}}" data-ng-bind="item.name"></a></td>
+								<td style="vertical-align: middle;"
+									data-ng-bind-html="item.state | shovelState:item.reason"></td>
+								<td style="vertical-align: middle;" data-ng-bind-html="item.durable | queueFeatures:item.auto_delete"></td>
+								<td style="vertical-align: middle;"
+									data-ng-bind="item.messages_ready"></td>
+								<td style="vertical-align: middle;"
+									data-ng-bind="item.messages_unacknowledged"></td>
+								<td style="vertical-align: middle;"
+									data-ng-bind="item.messages_ready+item.messages_unacknowledged"></td>
+								<td style="vertical-align: middle;"
+									data-ng-bind="item.message_stats.publish_details.rate | rate"></td>
+								<td style="vertical-align: middle;"
+									data-ng-bind="item.message_stats.deliver_get_details.rate | rate"></td>
+								<td style="vertical-align: middle;"
+									data-ng-bind="item.message_stats.ack_details.rate | rate"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+	</div>
+
+</section>

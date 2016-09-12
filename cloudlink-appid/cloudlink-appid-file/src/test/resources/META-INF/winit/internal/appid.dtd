@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!ELEMENT winit:appid (regions+,countries+,appTypes+,appIds+)>
+        <!ATTLIST winit:appid xmlns:winit CDATA #FIXED "http://com.winit/">
+
+        <!ELEMENT regions (region+) >
+        <!ELEMENT region (#PCDATA)>
+        <!ELEMENT countries (country+)>
+        <!ELEMENT country (#PCDATA)>
+
+        <!ELEMENT appTypes (appType+) >
+        <!ELEMENT appType (#PCDATA)>
+
+        <!ELEMENT appIds (appId+) >
+        <!ELEMENT appId (#PCDATA) >
+        <!ATTLIST appId name NMTOKEN #REQUIRED>
+        <!ATTLIST appId value NMTOKEN #REQUIRED>
+        <!ATTLIST appId description NMTOKEN #REQUIRED>

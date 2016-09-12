@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE winit:appid SYSTEM "appid.dtd">
+<winit:appid xmlns:winit="http://com.winit/">
+    <regions>
+        <region>CNR</region>
+        <region>USR</region>
+        <region>EUR</region>
+        <region>AUR</region>
+    </regions>
+    <countries>
+        <country>CN</country>
+        <country>US</country>
+        <country>UK</country>
+        <country>DE</country>
+        <country>AU</country>
+    </countries>
+    <appTypes>
+        <appType>TOM</appType>
+        <appType>OPC</appType>
+        <appType>OMS</appType>
+        <appType>IMS</appType>
+        <appType>TMS</appType>
+        <appType>SMS</appType>
+        <appType>FSP</appType>
+        <appType>FNA</appType>
+        <appType>CWM</appType>
+        <appType>UPS</appType>
+        <appType>MMS</appType>
+        <appType>UMS</appType>
+        <appType>SC</appType>
+        <appType>TP</appType>
+        <appType>WSG</appType>
+        <appType>WSG</appType>
+        <appType>EM</appType>
+    </appTypes>
+    <appIds>
+        <!--中国区域中心appId列表-->
+        <appId name="TOM1" value="TOM1.TOM.ALL.CNR" description="中国区管理门户"/>
+        <appId name="OPC1" value="OPC1.OPC.CN.CNR" description="中国区中国产品订单中心"/>
+        <appId name="OMS1" value="OMS1.OMS.ALL.CNR" description="中国区订单管理系统"/>
+        <appId name="IMS1" value="IMS1.IMS.ALL.CNR" description="中国区库存管理系统"/>
+        <appId name="TMS1" value="TMS1.TMS.ALL.CNR" description="中国区运输管理系统"/>
+        <appId name="SMS1" value="SMS1.SMS.ALL.CNR" description="中国区结算管理系统"/>
+        <appId name="FSP1" value="FSP1.FSP.ALL.CNR" description="中国区金融服务平台"/>
+        <appId name="FNA1" value="FNA1.FNA.ALL.CNR" description="中国区财务系统"/>
+        <appId name="CNSHA" value="CNSHA.CWM.CN.CNR" description="上海市闵行区仓库CWM"/>
+        <appId name="CNCAN" value="CNCAN.CWM.CN.CNR" description="广州市白云区仓库CWM"/>
+        <appId name="CNSZX" value="CNSZX.CWM.CN.CNR" description="深圳市龙岗区坂田街道CWM"/>
+        <appId name="CNHKG" value="CNHKG.CWM.CN.CNR" description="香港CWM"/>
+        <appId name="CNTAO" value="CNTAO.CWM.CN.CNR" description="青岛CWM"/>
+        <appId name="CNNGB" value="CNNGB.CWM.CN.CNR" description="宁波CWM"/>
+        <appId name="UPS1" value="UPS1.UPS.ALL.CNR" description="中国区基础数据系统"/>
+        <appId name="MMS1" value="MMS1.MMS.ALL.CNR" description="中国区商品管理系统"/>
+        <appId name="UMS1" value="UMS1.UMS.ALL.CNR" description="中国区用户管理系统"/>
+        <appId name="SC1" value="SC1.SC.ALL.CNR" description="中国区安全中心"/>
+        <appId name="TP1" value="TP1.TP.ALL.CNR" description="中国区轨迹平台"/>
+        <appId name="WST1" value="WSG1.WSG.ALL.CNR" description="中国区WebSocketGate"/>
+        <appId name="PIS1" value="PIS1.PIS.ALL.CNR" description="中国区伙伴集成系统"/>
+        <appId name="EM1" value="EM1.EM.ALL.CNR" description="中国区事件管理器"/>
+
+        <!--美国区域中心appId列表-->
+        <appId name="TOM2" value="TOM2.TOM.ALL.USR" description="美国区管理门户"/>
+        <appId name="OPC2" value="OPC2.OPC.US.USR" description="美国区美国产品订单中心"/>
+        <appId name="OMS2" value="OMS2.OMS.ALL.USR" description="美国区订单管理系统"/>
+        <appId name="IMS2" value="IMS2.IMS.ALL.USR" description="美国区库存管理系统"/>
+        <appId name="TMS2" value="TMS2.TMS.ALL.USR" description="美国区运输管理系统"/>
+        <appId name="SMS2" value="SMS2.SMS.ALL.USR" description="美国区结算管理系统"/>
+        <appId name="FSP2" value="FSP2.FSP.ALL.USR" description="美国区金融服务平台"/>
+        <appId name="MMS2" value="MMS2.MMS.ALL.USR" description="美国区商品管理系统"/>
+        <appId name="USKY" value="USKY.CWM.US.USR" description="美东肯塔基州仓CWM"/>
+        <appId name="USMA" value="USMA.CWM.US.USR" description="美西加利福尼亚州仓CWM"/>
+        <appId name="UPS2" value="UPS2.UPS.ALL.USR" description="美国区基础数据系统"/>
+        <appId name="UMS2" value="UMS2.UMS.ALL.USR" description="美国区用户管理系统"/>
+        <appId name="SC2" value="SC2.SC.ALL.USR" description="美国区安全中心"/>
+        <appId name="TP2" value="TP2.TP.ALL.USR" description="美国区轨迹平台"/>
+        <appId name="WST2" value="WSG2.WSG.ALL.USR" description="美国区WebSocketGate"/>
+
+        <!--欧洲区域中心appId列表-->
+        <appId name="TOM3" value="TOM3.TOM.ALL.EUR" description="欧洲区管理门户"/>
+        <appId name="OPC31" value="OPC31.OPC.UK.EUR" description="欧洲区英国产品订单中心"/>
+        <appId name="OPC32" value="OPC32.OPC.DE.EUR" description="欧洲区德国产品订单中心"/>
+        <appId name="OMS3" value="OMS3.OMS.ALL.EUR" description="欧洲区订单管理系统"/>
+        <appId name="IMS3" value="IMS3.IMS.ALL.EUR" description="欧洲区库存管理系统"/>
+        <appId name="TMS3" value="TMS3.TMS.ALL.EUR" description="欧洲区运输管理系统"/>
+        <appId name="SMS3" value="SMS3.SMS.ALL.EUR" description="欧洲区结算管理系统"/>
+        <appId name="FSP3" value="FSP3.FSP.ALL.EUR" description="欧洲区金融服务平台"/>
+        <appId name="MMS3" value="MMS3.MMS.ALL.EUR" description="欧洲区商品管理系统"/>
+        <appId name="UKLE" value="UKLE.CWM.UK.EUR" description="英国1仓莱斯特郡CWM"/>
+        <appId name="UKMA" value="UKMA.CWM.UK.EUR" description="英国2仓曼彻斯特郡CWM"/>
+        <appId name="DEBRE" value="DEBRE.CWM.DE.EUR" description="德国不来梅州库CWM"/>
+        <appId name="BEMO" value="BEMO.CWM.BE.EUR" description="比利时MO城市CWM"/>
+        <appId name="UPS3" value="UPS3.UPS.ALL.EUR" description="欧洲区基础数据系统"/>
+        <appId name="UMS3" value="UMS3.UMS.ALL.EUR" description="欧洲区用户管理系统"/>
+        <appId name="SC3" value="SC3.SC.ALL.EUR" description="欧洲区安全中心"/>
+        <appId name="TP3" value="TP3.TP.ALL.EUR" description="欧洲区轨迹平台"/>
+        <appId name="WST3" value="WSG3.WSG.ALL.EUR" description="欧洲区WebSocketGate"/>
+
+        <!--澳洲区域中心appId列表-->
+        <appId name="TOM4" value="TOM4.TOM.ALL.AUR" description="澳洲区管理门户"/>
+        <appId name="OPC4" value="OPC4.OPC.AU.AUR" description="澳洲区澳大利亚产品订单中心"/>
+        <appId name="OMS4" value="OMS4.OMS.ALL.AUR" description="澳洲区订单管理系统"/>
+        <appId name="IMS4" value="IMS4.IMS.ALL.AUR" description="澳洲区库存管理系统"/>
+        <appId name="TMS4" value="TMS4.TMS.ALL.AUR" description="澳洲区运输管理系统"/>
+        <appId name="SMS4" value="SMS4.SMS.ALL.AUR" description="澳洲区结算管理系统"/>
+        <appId name="OMS4" value="OMS4.FSP.ALL.AUR" description="澳洲区金融服务平台"/>
+        <appId name="MMSAUR" value="MMSAUR.MMS.ALL.AUR" description="澳洲区商品管理系统"/>
+        <appId name="AAUYD" value="AAUYD.CWM.AU.AUR" description="澳洲新南威尔士州CWM"/>
+        <appId name="UPS4" value="UPS4.UPS.ALL.AUR" description="澳洲区基础数据系统"/>
+        <appId name="UMS4" value="UMS4.UMS.ALL.AUR" description="澳洲区用户管理系统"/>
+        <appId name="SC4" value="SC4.SC.ALL.AUR" description="澳洲区安全中心"/>
+        <appId name="TP4" value="TP4.TP.ALL.AUR" description="澳洲区轨迹平台"/>
+        <appId name="WST4" value="WSG4.WSG.ALL.AUR" description="澳洲区WebSocketGate"/>
+    </appIds>
+</winit:appid>

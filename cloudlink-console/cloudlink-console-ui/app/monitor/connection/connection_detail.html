@@ -1,0 +1,210 @@
+<section class="content-header">
+	<h1>&nbsp;</h1>
+	<ol class="breadcrumb">
+		<li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i>
+				云链监控</a></li>
+		<li class="active"><a href="#/app/monitor/connections">Connections监控</a></li>
+		<li class="active" data-ng-bind="currentArea"></li>
+		<li class="active" data-ng-bind="currentNav"></li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+	<div class="row" ng-controller="connectionDetailMonitorCtrl">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<div class="row">
+						<div class="col-xs-4 col-md-4">
+							<a id="btnExpand" class="btn btn-default"
+								style="margin-left: 20px;"
+								data-ng-click="toggleExpand('btnExpand')"> <span
+								class="glyphicon glyphicon-collapse-down"></span> <font>收起所有</font></a>
+						</div>
+						<div class="col-xs-8 col-md-8">
+							<select data-ng-model="refreshTime" id="refreshTime"
+								class="input-sm" name="refreshTime"
+								ng-change="changeRefreshTime()" style="float: right;"
+								ng-options="option.value as option.label for option in $root.configs.monitorRefreshCycle"></select>
+							<select data-ng-model="$root.configs.defaultDataAge"
+								class="input-sm" ng-change="$root.chartRangeChange()"
+								style="float: right; margin-right: 10px;"
+								ng-options="option.age as option.label for option in $root.configs.monitorChartRange">
+							</select>
+						</div>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body" style="">
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default">
+							<div class="panel-heading"
+								data-ng-click="toggle('panelChartMsgRate')">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"> Message
+										Rate </a>
+								</h4>
+							</div>
+							<div id="panelChartMsgRate" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<div id="chartMsgRate"
+										style="padding: 0 0 0 0; margin: 0 10px 0 0;"></div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" data-ng-click="toggle('panelNode')">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"> Details </a>
+								</h4>
+							</div>
+							<div id="panelNode" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-6">
+											<div style="margin-top: 10px;">
+												<div
+													style="height: 28px; float: left; text-align: right; width: 260px; padding: 5px 10px 0px 0; font-weight: bold; border-right: solid 1px #cccccc">
+													User name</div>
+												<div style="padding: 5px 0 0 10px; float: left;" data-ng-bind="connection.user"></div>
+												<div style="clear: both;"></div>
+												<div
+													style="height: 28px; float: left; text-align: right; width: 260px; padding: 5px 10px 0px 0; font-weight: bold; border-right: solid 1px #cccccc">
+													Protocol</div>
+												<div style="padding: 5px 0 0 10px; float: left;" data-ng-bind="connection.protocol"></div>
+												<div style="clear: both;"></div>
+												<div
+													style="height: 28px; float: left; text-align: right; width: 260px; padding: 5px 10px 0px 0; font-weight: bold; border-right: solid 1px #cccccc">
+													Connected at</div>
+												<div style="padding: 5px 0 0 10px; float: left;" data-ng-bind="connection.connected_at | date : 'yyyy-MM-dd HH:mm:ss'"></div>
+												<div style="clear: both;"></div>
+												<div
+													style="height: 28px; float: left; text-align: right; width: 260px; padding: 5px 10px 0px 0; font-weight: bold; border-right: solid 1px #cccccc">
+													Authentication</div>
+												<div style="padding: 5px 0 0 10px; float: left;" data-ng-bind="connection.auth_mechanism"></div>
+												<div style="clear: both;"></div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div style="margin-top: 10px;">
+												<div
+													style="height: 28px; float: left; text-align: right; width: 260px; padding: 5px 10px 0px 0; font-weight: bold; border-right: solid 1px #cccccc">
+													State</div>
+												<div style="padding: 5px 0 0 10px; float: left;" data-ng-bind-html="connection.state | shovelState"></div>
+												<div style="clear: both;"></div>
+												<div
+													style="height: 28px; float: left; text-align: right; width: 260px; padding: 5px 10px 0px 0; font-weight: bold; border-right: solid 1px #cccccc">
+													Heartbeat</div>
+												<div style="padding: 5px 0 0 10px; float: left;" data-ng-bind="connection.timeout + 's'"></div>
+												<div style="clear: both;"></div>
+												<div
+													style="height: 28px; float: left; text-align: right; width: 260px; padding: 5px 10px 0px 0; font-weight: bold; border-right: solid 1px #cccccc">
+													Frame max</div>
+												<div style="padding: 5px 0 0 10px; float: left;" data-ng-bind="connection.frame_max | capacityFormat"></div>
+												<div style="clear: both;"></div>
+												<div
+													style="height: 28px; float: left; text-align: right; width: 260px; padding: 5px 10px 0px 0; font-weight: bold; border-right: solid 1px #cccccc">
+													Channel limit</div>
+												<div style="padding: 5px 0 0 10px; float: left;" data-ng-bind="connection.channel_max + ' channels'"></div>
+												<div style="clear: both;"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+                            <div class="panel-heading" data-ng-click="toggle('consumersPanelNode')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        Consumers
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="consumersPanelNode" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                     <div class="row" style="margin:0 0 0 0;" >
+                                            <table id="example1" class="table table-bordered table-striped">
+												<thead>
+													<tr>
+														<th colspan="4" style="color: black;">Overview</td>
+														<th colspan="3" style="color: black;">Details</td>
+														<th colspan="4" style="color: black;">Message rates</td>
+													</tr>
+													<tr>
+														<th><a href="javascript:void(0);" style="color: black;"
+															data-ng-click="sort('name')">Name <span
+																class="glyphicon glyphicon-sort btn-xs"></span>
+														</a></th>
+														<th><a href="javascript:void(0);" style="color: black;"
+															data-ng-click="sort('user')">User name <span
+																class="glyphicon glyphicon-sort btn-xs"></span>
+														</a></th>
+														<th><a href="javascript:void(0);" style="color: black;"
+															data-ng-click="sort('state','idle_since')">state <span
+																class="glyphicon glyphicon-sort btn-xs"></span>
+														</a></th>
+														<th><a href="javascript:void(0);" style="color: black;"
+															data-ng-click="sort('confirm')">Mode <span
+																class="glyphicon glyphicon-sort btn-xs"></span>
+														</a></th>
+														<th><a href="javascript:void(0);" style="color: black;"
+															data-ng-click="sort('messages_unconfirmed')">Unconfirmed <span
+																class="glyphicon glyphicon-sort btn-xs"></span>
+														</a></th>
+														<th><a href="javascript:void(0);" style="color: black;"
+															data-ng-click="sort('prefetch_count')">Prefetch <span
+																class="glyphicon glyphicon-sort btn-xs"></span>
+														</a></th>
+														<th><a href="javascript:void(0);" style="color: black;"
+															data-ng-click="sort('messages_unacknowledged')">Unacked <span
+																class="glyphicon glyphicon-sort btn-xs"></span>
+														</a></th>
+														<th><a href="javascript:void(0);" style="color: black;"
+															data-ng-click="sort('message_stats.publish_details.rate')">publish <span
+																class="glyphicon glyphicon-sort btn-xs"></span>
+														</a></th>
+														<th><a href="javascript:void(0);" style="color: black;"
+															data-ng-click="sort('message_stats.confirm_details.rate')">confirm <span
+																class="glyphicon glyphicon-sort btn-xs"></span>
+														</a></th>
+														<th><a href="javascript:void(0);" style="color: black;"
+															data-ng-click="sort('message_stats.deliver_get_details.rate')">deliver / get <span
+																class="glyphicon glyphicon-sort btn-xs"></span>
+														</a></th>
+														<th><a href="javascript:void(0);" style="color: black;"
+															data-ng-click="sort('message_stats.ack_details.rate')">ack <span
+																class="glyphicon glyphicon-sort btn-xs"></span>
+														</a></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr data-ng-repeat="item in channels">
+														<td style="vertical-align: middle;"><a href="#/app/monitor/channel/{{selectedArea}}/{{item.name}}" data-ng-bind="item.name | channelName"></a></td>
+														<td style="vertical-align: middle;" data-ng-bind="item.user"></td>
+														<td style="vertical-align: middle;" data-ng-bind-html="item.state | channelState : item.idle_since"></td>
+														<td style="vertical-align: middle;" data-ng-bind-html="item.confirm | exchangeMode : item.transactional"></td>
+														<td style="vertical-align: middle;" data-ng-bind-html="item.messages_unconfirmed"></td>
+														<td style="vertical-align: middle;" data-ng-bind-html="item.prefetch_count | channelPrefetch"></td>
+														<td style="vertical-align: middle;" data-ng-bind-html="item.messages_unacknowledged"></td>
+														<td style="vertical-align: middle;" data-ng-bind="item.message_stats.publish_details.rate | rate"></td>
+														<td style="vertical-align: middle;" data-ng-bind="item.message_stats.confirm_details.rate | rate"></td>
+														<td style="vertical-align: middle;" data-ng-bind="item.message_stats.deliver_get_details.rate | rate"></td>
+														<td style="vertical-align: middle;" data-ng-bind="item.message_stats.ack_details.rate | rate"></td>
+													</tr>
+												</tbody>
+											</table>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+	</div>
+
+</section>

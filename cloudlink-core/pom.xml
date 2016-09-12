@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>cloudlink-parent</artifactId>
+        <groupId>com.winit</groupId>
+        <version>1.2.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>cloudlink-core</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>The core module of cloudlink project</description>
+    <dependencies>
+        <dependency>
+            <groupId>com.winit</groupId>
+            <artifactId>cloudlink-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.winit</groupId>
+            <artifactId>cloudlink-message</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.winit</groupId>
+            <artifactId>cloudlink-command</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.winit</groupId>
+            <artifactId>cloudlink-event</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>com.winit</groupId>
+        	<artifactId>cloudlink-registry-zookeeper</artifactId>
+        	<version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-context</artifactId>
+        	<scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-beans</artifactId>
+        	<scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-tx</artifactId>
+        	<scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>

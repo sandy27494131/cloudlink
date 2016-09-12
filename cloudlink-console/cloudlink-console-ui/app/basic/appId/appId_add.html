@@ -1,0 +1,101 @@
+<form name="appIdForm" ng-submit="save(appIdForm.$valid)"  validate>
+    <div class="panel panel-info">
+        <div class="panel-heading" align="center" style="font-weight: bold;">编辑应用实例</div>
+        <table class="table table-hover table-striped table-bordered" style="width: 100%; height: 100%; padding: 0; margin: 0;">
+            <tr>
+                <td width="100%" align="center">
+                    <div class="form-group" style="margin-bottom: 5px;">
+                        <div class="input-group">
+                            <div class="input-group-addon" style="width: 280px;text-align: right;">appId：</div>
+                            <input type="text" name="appId" id="appIdCode" class="form-control input-sm"   placeholder="请输入appId"  style="width: 270px;"
+                                   value="{{obj.uniqueId}}.{{obj.appType}}.{{obj.country}}.{{obj.area}}" ng-readonly="true"
+                                   popover popover-show="appIdForm.appId.$invalid"
+                                   popover-options='appId不可为空'   required>
+                            <div class="input-group-addon" style="width: 600px;text-align: left;">示例：OPC1.OPC.CN.CNR(唯一编号.应用类型标识.国家标识.区域)</div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 5px;">
+                        <div class="input-group">
+                            <div class="input-group-addon" style="width: 280px;text-align: right;">唯一标识：</div>
+                            <input type="text" id="uniqueId" name="uniqueId" class="form-control input-sm" data-ng-model="obj.uniqueId" placeholder="请输入唯一标识"
+                                   style="width: 270px;" ng-readonly="code"
+                                   popover popover-show="appIdForm.uniqueId.$invalid"
+                                   popover-options='唯一标识长度在1-10之间' ng-maxlength='10'   required>
+                            <div class="input-group-addon" style="width: 600px;text-align: left;">全球唯一标识</div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 5px;">
+                        <div class="input-group">
+                            <div class="input-group-addon" style="width: 280px;text-align: right;">系统类型：</div>
+                            <select type="text" id="appType" name="appType" class="form-control input-sm" data-ng-model="obj.appType"
+                                    placeholder="请选择系统类型" style="width: 270px;"    ng-disabled="code"
+                                    popover popover-show="appIdForm.appType.$invalid"
+                                    popover-options='系统类型不可为空'   required>
+                                <option value="{{item.code}}" data-ng-repeat="item in appTypes">{{item.code}}</option>
+                            </select>
+                            <div class="input-group-addon" style="width: 600px;text-align: left;">示例：OMS、PMS、WMS</div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 5px;">
+                        <div class="input-group">
+                            <div class="input-group-addon" style="width: 280px;text-align: right;">所属国家：</div>
+                            <input type="text" id="country" name="country" class="form-control input-sm" data-ng-model="obj.country" placeholder="请输入所属国家"
+                                   style="width: 270px;"  ng-readonly="code"
+                                   popover popover-show="appIdForm.country.$invalid"
+                                   popover-options='所属国家长度在1-10之间' ng-maxlength='10'   required>
+                            <div class="input-group-addon" style="width: 600px;text-align: left;"></div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 5px;">
+                        <div class="input-group">
+                            <div class="input-group-addon" style="width: 280px;text-align: right;">数据中心：</div>
+                            <select type="text" id="area" name="area" class="form-control input-sm" data-ng-model="obj.area" placeholder="请选择所属数据中心"
+                                    style="width: 270px;" ng-disabled="code"
+                                    popover popover-show="appIdForm.area.$invalid"
+                                    popover-options='所属数据中心不可为空'   required>
+                                <option value="{{item.code}}" data-ng-repeat="item in areas">{{item.code}}</option>
+                            </select>
+                            <div class="input-group-addon" style="width: 600px;text-align: left;">示例：CNR、USR、AUR</div>
+                        </div>
+                    </div>
+                    <div class="form-group form-horizontal" style="margin-bottom: 5px;">
+                        <div class="input-group">
+                            <div class="input-group-addon" style="width: 280px;text-align: right;">是否启用：</div>
+                            <div class=" checkbox form-control" style="width: 270px; ">
+                                <label  style="float:left; ">
+                                    <input type="checkbox" name="enable" style=""  data-ng-model="obj.enable" ng-true-value="true"
+                                           ng-false-value="false"     > 启用
+                                </label>
+                            </div>
+                            <div class="input-group-addon" style="width: 600px;text-align: left;"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" style="margin-bottom: 5px;">
+                        <div class="input-group">
+                            <div class="input-group-addon" style="width: 280px;text-align: right;">备注：</div>
+                            <input type="text" id="remark" name="remark" class="form-control input-sm" data-ng-model="obj.remark" placeholder="请输入备注" style="width: 270px;"
+                                    >
+                            <div class="input-group-addon" style="width: 600px;text-align: left;"></div>
+                        </div>
+                    </div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td colspan="3" align="center">
+                                <button type="button" class="btn btn-info" data-ng-click="returnPage()">返回</button>
+                                &nbsp;&nbsp;&nbsp;
+                                <button type="submit" id="btnSave" class="btn btn-success" data-ng-show="isUpdate">保存</button>
+                            </td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

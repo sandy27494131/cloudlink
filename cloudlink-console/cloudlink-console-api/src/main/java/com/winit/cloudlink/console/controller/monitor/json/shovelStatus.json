@@ -1,0 +1,28 @@
+[
+    {
+        "node": "rabbit@mqx-n01", 
+        "timestamp": "2016-01-10 4:32:47", 
+        "name": "AUR_TO_CNR", 
+        "vhost": "/", 
+        "type": "dynamic", 
+        "state": "running", 
+        "definition": {
+            "src-queue": "WINIT.SHOVEL.TO.CNR", 
+            "dest-exchange": "winit_receive"
+            
+            /* "src-exchange": "WINIT.SHOVEL.TO.CNR",*/
+            /*"dest-queue": "winit_receive"*/
+        }, 
+        "src_uri": "amqp://172.16.3.166:5672", 
+        "dest_uri": "amqp://172.16.3.164:5672"
+    }, 
+    {
+        "node": "rabbit@mqx-n01", 
+        "timestamp": "2016-01-05 22:22:24", 
+        "name": "Move from LOGISTICS_CMD.TMSSZ1.TMS.CN.CNR", 
+        "vhost": "/", 
+        "type": "dynamic", 
+        "state": "terminated", 
+        "reason": "{shutdown,autodelete}"
+    }
+]

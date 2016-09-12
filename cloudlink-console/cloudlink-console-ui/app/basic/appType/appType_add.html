@@ -1,0 +1,46 @@
+<form name="appTypeForm" ng-submit="save(appTypeForm.$valid)"  validate>
+    <div class="panel panel-info">
+        <div class="panel-heading" align="center" style="font-weight: bold;">编辑应用类型</div>
+        <table class="table table-hover table-striped table-bordered" style="width: 100%; height: 100%; padding: 0; margin: 0;">
+            <tr>
+                <td width="100%" align="center">
+
+                    <div class="form-group" style="margin-bottom: 5px;">
+                        <div class="input-group">
+                            <div class="input-group-addon" style="width: 280px;text-align: right;">应用类型：</div>
+                            <input type="text" name="code" id="appCode" class="form-control input-sm" data-ng-model="obj.code" placeholder="请输入应用类型"
+                                   style="width: 270px;" ng-readonly="code"
+                                   popover popover-show="appTypeForm.code.$invalid"
+                                   popover-options='应用类型不可为空,长度在1-10位'  maxlength="10"   required>
+                            <div class="input-group-addon" style="width: 600px;text-align: left;">示例：OMS、PMS、TMS、WMS</div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 5px;">
+                        <div class="input-group">
+                            <div class="input-group-addon" style="width: 280px;text-align: right;">中文名称：</div>
+                            <input type="text" id="appName" name="name" class="form-control input-sm" data-ng-model="obj.name" placeholder="请输入中文名称" style="width: 270px;"
+                                   popover popover-show="appTypeForm.name.$invalid"
+                                   popover-options='长度不可超过32位'   maxlength="32" >
+                            <div class="input-group-addon" style="width: 600px;text-align: left;">系统的中文名称</div>
+                        </div>
+                    </div>
+
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td colspan="3" align="center">
+                                <button type="button" class="btn btn-info" data-ng-click="returnPage()">返回</button>
+                                &nbsp;&nbsp;&nbsp;
+                                <button type="submit" id="btnSave" class="btn btn-success" data-ng-show="isUpdate">保存</button>
+                            </td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

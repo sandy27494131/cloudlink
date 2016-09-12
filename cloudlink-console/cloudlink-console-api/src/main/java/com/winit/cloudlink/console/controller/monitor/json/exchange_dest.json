@@ -1,0 +1,29 @@
+[
+    {
+        "source": "winit_send", 
+        "vhost": "/", 
+        "destination": "winit_receive", 
+        "destination_type": "exchange", 
+        "routing_key": "#.AUR", 
+        "arguments": { }, 
+        "properties_key": "%23.AUR"
+    }, 
+    {
+        "source": "winit_send", 
+        "vhost": "/", 
+        "destination": "winit_receive", 
+        "destination_type": "exchange", 
+        "routing_key": "#.CNR", 
+        "arguments": { }, 
+        "properties_key": "%23.CNR"
+    }, 
+    {
+        "source": "winit_send", 
+        "vhost": "/", 
+        "destination": "winit_receive", 
+        "destination_type": "exchange", 
+        "routing_key": "#.USR", 
+        "arguments": { }, 
+        "properties_key": "%23.USR"
+    }
+]

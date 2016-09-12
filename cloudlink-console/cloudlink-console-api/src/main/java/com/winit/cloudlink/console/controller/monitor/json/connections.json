@@ -1,0 +1,108 @@
+[
+    {
+        "recv_oct": 114398, 
+        "recv_oct_details": {
+            "rate": 0
+        }, 
+        "send_oct": 114467, 
+        "send_oct_details": {
+            "rate": 0
+        }, 
+        "recv_cnt": 14248, 
+        "send_cnt": 14247, 
+        "send_pend": 0, 
+        "state": "running", 
+        "channels": 1, 
+        "type": "network", 
+        "node": "rabbit@mqx-n01", 
+        "name": "172.16.3.164:34431 -> 172.16.3.164:5672", 
+        "port": 5672, 
+        "peer_port": 34431, 
+        "host": "172.16.3.164", 
+        "peer_host": "172.16.3.164", 
+        "ssl": false, 
+        "peer_cert_subject": "", 
+        "peer_cert_issuer": "", 
+        "peer_cert_validity": "", 
+        "auth_mechanism": "PLAIN", 
+        "ssl_protocol": "", 
+        "ssl_key_exchange": "", 
+        "ssl_cipher": "", 
+        "ssl_hash": "", 
+        "protocol": "AMQP 0-9-1", 
+        "user": "guest", 
+        "vhost": "/", 
+        "timeout": 60, 
+        "frame_max": 131072, 
+        "channel_max": 0, 
+        "client_properties": {
+            "product": "RabbitMQ", 
+            "version": "3.5.6", 
+            "platform": "Erlang", 
+            "copyright": "Copyright (c) 2007-2015 Pivotal Software, Inc.", 
+            "information": "Licensed under the MPL.  See http://www.rabbitmq.com/", 
+            "capabilities": {
+                "publisher_confirms": true, 
+                "exchange_exchange_bindings": true, 
+                "basic.nack": true, 
+                "consumer_cancel_notify": true, 
+                "connection.blocked": true, 
+                "authentication_failure_close": true
+            }
+        }, 
+        "connected_at": 1452003819513
+    }, 
+    {
+        "recv_oct": 65442, 
+        "recv_oct_details": {
+            "rate": 0
+        }, 
+        "send_oct": 65456, 
+        "send_oct_details": {
+            "rate": 0
+        }, 
+        "recv_cnt": 8120, 
+        "send_cnt": 8119, 
+        "send_pend": 0, 
+        "state": "running", 
+        "channels": 1, 
+        "type": "network", 
+        "node": "rabbit@mqx-n01", 
+        "name": "172.16.3.164:39202 -> 172.16.3.164:5672", 
+        "port": 5672, 
+        "peer_port": 39202, 
+        "host": "172.16.3.164", 
+        "peer_host": "172.16.3.164", 
+        "ssl": false, 
+        "peer_cert_subject": "", 
+        "peer_cert_issuer": "", 
+        "peer_cert_validity": "", 
+        "auth_mechanism": "PLAIN", 
+        "ssl_protocol": "", 
+        "ssl_key_exchange": "", 
+        "ssl_cipher": "", 
+        "ssl_hash": "", 
+        "protocol": "AMQP 0-9-1", 
+        "user": "guest", 
+        "vhost": "/", 
+        "timeout": 60, 
+        "frame_max": 131072, 
+        "channel_max": 0, 
+        "client_properties": {
+            "product": "RabbitMQ", 
+            "version": "3.5.6", 
+            "platform": "Erlang", 
+            "copyright": "Copyright (c) 2007-2015 Pivotal Software, Inc.", 
+            "information": "Licensed under the MPL.  See http://www.rabbitmq.com/", 
+            "capabilities": {
+                "publisher_confirms": true, 
+                "exchange_exchange_bindings": true, 
+                "basic.nack": true, 
+                "consumer_cancel_notify": true, 
+                "connection.blocked": true, 
+                "authentication_failure_close": true
+            }
+        }, 
+        "connected_at": 1452371567314
+    }
+]

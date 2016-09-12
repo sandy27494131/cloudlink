@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+<h1>以下数据中心的队列异常：</h1>
+<table border="1" width="90%">
+    <tr>
+        <td>数据中心编号</td>
+        <td>队列名</td>
+        <td>是否创建</td>
+        <td>是否持久化</td>
+        <td>是否自动删除</td>
+        <td>消息数量</td>
+        <td>是否超过阈值</td>
+        <td>是否正常消费</td>
+    </tr>
+    #foreach($obj in $info)
+        <tr>
+            <td>$obj.areaCode</td>
+            <td>$obj.queueName</td>
+            <td style="width:200px;">
+                #if($obj.exist)
+                    是
+                #else
+                    <span style="color:red;">否</span>
+                #end
+            </td>
+            <td style="width:200px;">
+                #if($obj.durable)
+                    是
+                #else
+                    <span style="color:red;">否</span>
+                #end
+            </td>
+            <td style="width:200px;">
+                #if($obj.autoDelete)
+                <span style="color:red;">是</span>
+                #else
+                    否
+                #end
+            </td>
+            <td style="width:200px;">
+                #if($obj.msgOver)
+                <span style="color:red;">$obj.msgAmount</span>
+                #else
+                    $obj.msgAmount
+                #end
+            </td>
+            <td style="width:200px;">
+                #if($obj.msgOver)
+                    <span style="color:red;">是</span>
+                #else
+                     否
+                #end
+            </td>
+            <td style="width:200px;">
+                #if($obj.consumed)
+                    是
+                #else
+                <span style="color:red;">否</span>
+                #end
+            </td>
+        </tr>
+    #end
+</table>
+#*#if($info.get("unackAreas").size()>0)
+    <h1>以下数据中心的队列堆积未应答消息：</h1>
+    <table border="1" width="90%">
+        <tr>
+            <td>数据中心编号</td>
+            <td>未应答消息数量</td>
+        </tr>
+        #foreach($row in ${info.get("unackAreas")})
+            <tr>
+                <td style="width:200px;">
+                    $row[0]
+                </td>
+            </tr>
+            <tr>
+                <td style="width:200px;">
+                    $row[1]
+                </td>
+            </tr>
+        #end
+    </table>
+#end*#
+</body>
+</html>

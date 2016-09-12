@@ -1,0 +1,67 @@
+<header class="main-header">
+	<!-- Logo -->
+	<a href="#" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+		<span class="logo-mini"><b>A</b>C</span> <!-- logo for regular state and mobile devices -->
+		<span class="logo-lg"><b>Admin</b> Cloudlink</span>
+	</a>
+	<!-- Header Navbar: style can be found in header.less -->
+	<nav class="navbar navbar-static-top" role="navigation">
+		<!-- Sidebar toggle button-->
+		<a href="javascritp:void(0)" class="sidebar-toggle"
+			data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle
+				navigation</span>
+		</a>
+		<div class="navbar-custom-menu">
+			<ul class="nav navbar-nav">
+				<!-- Messages: style can be found in dropdown.less-->
+				<li style="padding-top: 10px;">
+					<div id="loadingShow" class="loading-modal custom-modal" style="display: none;">
+					    <div class="input-group custom-loading">
+						      <!-- <span class="glyphicon glyphicon-refresh input-group-addon overlay" style="top: 0px;"></span> -->
+						      <span class="input-group-addon" style="background: #98f898;">&nbsp;加载中...</span>
+					    </div>
+					</div>
+				</li>
+
+				<!-- User Account: style can be found in dropdown.less -->
+				<li class="dropdown user user-menu"><a
+					href="javascritp:void(0)" class="dropdown-toggle"
+					data-toggle="dropdown"> <img src="plugins/dist/img/user2-160x160.jpg"
+						class="user-image" alt="User Image" /> <span class="hidden-xs" data-ng-bind="$root.loginUser.username"></span>
+				</a>
+					<ul class="dropdown-menu">
+						<!-- User image -->
+						<li class="user-header"><img src="plugins/dist/img/user2-160x160.jpg"
+							class="img-circle" alt="User Image" />
+							<p data-ng-bind="$root.loginUser.username">
+								Admin - Admin <small></small>
+							</p></li>
+						<!-- Menu Body -->
+						<!-- <li class="user-body">
+							<div class="col-xs-4 text-center">
+								<a href="javascritp:void(0)">Followers</a>
+							</div>
+							<div class="col-xs-4 text-center">
+								<a href="javascritp:void(0)">Sales</a>
+							</div>
+							<div class="col-xs-4 text-center">
+								<a href="javascritp:void(0)">Friends</a>
+							</div>
+						</li> -->
+						<!-- Menu Footer-->
+						<li class="user-footer">
+							<div class="pull-left">
+								<a href="#/app/user/password/modify" class="btn btn-default btn-flat">修改密码</a>
+							</div>
+							<div class="pull-right">
+								<a href="javascritp:void(0)" onclick="logout()" class="btn btn-default btn-flat">登出</a>
+							</div>
+						</li>
+					</ul></li>
+				<!-- Control Sidebar Toggle Button -->
+				<!-- <li><a href="javascritp:void(0)" data-toggle="control-sidebar"><i
+						class="fa fa-gears"></i></a></li> -->
+			</ul>
+		</div>
+	</nav>
+</header>

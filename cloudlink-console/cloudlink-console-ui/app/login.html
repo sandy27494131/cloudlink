@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html data-ng-app="loginApp">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+
+<link href="../plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<style type="text/css">
+body {
+	font-family: 'microsoft yahei', Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+</style>
+</head>
+<body ng-controller="LoginCtrl" data-ng-cloak>
+	<div class="alert alert-danger" align="center" data-ng-show="loginErrorMsg">
+		<a href="#" class="close" data-dismiss="alert"> &times; </a> <strong data-ng-bind="loginErrorMsg"></strong>
+	</div>
+	<form id="loginForm" ng-submit="login()" validate>
+		<div class="row">
+			<div id="loginModal" class="modal show" style="top: 20%;">
+				<div class="modal-dialog" style="width: 500px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="text-center text-primary">Cloudlink 登录</h1>
+						</div>
+						<div class="modal-body">
+							<form action="" class="form col-md-12 center-block">
+								<div class="form-group">
+									<input type="text" data-ng-model="data.username"
+										class="form-control input-lg" placeholder="用户名" required>
+								</div>
+								<div class="form-group">
+									<input type="password" data-ng-model="data.password"
+										class="form-control input-lg" placeholder="登录密码" required>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-lg btn-block">立刻登录</button>
+									<span></span>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+<script type="text/javascript" charset="utf-8"
+	src="../plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="../plugins/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="../plugins/angular/angular.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/config.api.js"></script>
+<script type="text/javascript">
+	var loginApp = angular.module('loginApp', []);
+
+	loginApp.controller('LoginCtrl', [
+			'$scope',
+			'$window',
+			function($scope, $window) {
+				$scope.data = {
+					username : "",
+					password : ""
+				};
+				$scope.loginErrorMsg="";
+				$scope.login = function() {
+					$.ajax({
+						url : API_BASE_URL + "/api/login",
+						data : JSON.stringify($scope.data),
+						method : "POST",
+						crossDomain : true,
+						contentType : "application/json; charset=utf-8",
+						dataType : "JSON",
+						beforeSend : function() {
+						},
+						success : function(data) {
+							if (data.errorCode == 0) {
+								window.location.href = "../index.html?tk="
+										+ data.data;
+							} else {
+								$scope.$apply(function(){
+									$scope.loginErrorMsg=data.errorMsg;
+								});
+							}
+						},
+						error:function(){
+							$scope.$apply(function(){
+								$scope.loginErrorMsg="请检出网络是否正常、API地址配置是否正确、API服务是否可正常访问。";
+							});
+						},
+						complete : function(xhr, status) {
+						}
+					});
+				}
+			} ]);
+</script>
+</html>

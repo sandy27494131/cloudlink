@@ -1,0 +1,304 @@
+<section class="content-header">
+    <h1>&nbsp;</h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:void(0);"><i class="fa fa-dashboard"></i>
+            云链监控</a></li>
+        <li id="areaCode" class="active">数据中心</li>
+        <li id="nodeName" class="active">节点</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" >
+
+    <div class="row"  ng-controller="nodeCtrl" >
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="row">
+						<div class="col-xs-4 col-md-4">
+							<a id="btnExpand" class="btn btn-default"
+								style="margin-left: 20px;"
+								data-ng-click="toggleExpand('btnExpand')"> <span
+								class="glyphicon glyphicon-collapse-down"></span> <font>收起所有</font></a>
+						</div>
+						<div class="col-xs-8 col-md-8">
+							<select data-ng-model="refreshTime" id="refreshTime"
+								class="input-sm" name="refreshTime"
+								ng-change="changeRefreshTime()" style="float: right;"
+								ng-options="option.value as option.label for option in $root.configs.monitorRefreshCycle"></select>
+							<select data-ng-model="$root.configs.defaultDataAge"
+								class="input-sm" ng-change="$root.chartRangeChange()"
+								style="float: right; margin-right: 10px;"
+								ng-options="option.age as option.label for option in $root.configs.monitorChartRange">
+							</select>
+						</div>
+					</div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" style=" ">
+                    <h2 style="margin:0 0 15px 10px;">Node  {{$stateParams.nodeName}}</h2>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelNodeOverview')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        Overview
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelNodeOverview" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="overviewLeft" style="margin-top:10px;float: left;">
+                                            <div style="height:28px;float:left;text-align: right; width: 80px;padding:5px 10px 0px 0;font-weight:bold; border-right:solid 1px #cccccc">
+                                                Uptime
+                                            </div>
+                                            <div style="padding :5px 0 0 10px;float:left;">
+                                                {{node['uptime'] | fmtUptime}}
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                            <div style="height:28px;float:left;text-align: right; width: 80px;padding:5px 10px 0px 0;font-weight:bold; border-right:solid 1px #cccccc">
+                                                Type
+                                            </div>
+                                            <div style="padding :5px 0 0 10px;float:left;">
+                                                {{node['type']}}
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                        </div>
+                                        <div id="overviewRight" style="margin-top:10px;margin-left:50px;float: left;">
+                                            <div style="height:28px;float:left;text-align: right; width: 160px;padding:5px 10px 0px 0;font-weight:bold;border-right:solid 1px #cccccc">
+                                                Config files
+                                            </div>
+                                            <div style=" float:left;padding:5px 0px 0px 10px;" data-ng-repeat="fileName in node['config_files']" >
+                                                {{fileName}}
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                            <div style="height:28px;float:left;text-align: right; width: 160px;padding:5px 10px 0px 0;font-weight:bold; border-right:solid 1px #cccccc">
+                                                Database directory
+                                            </div>
+                                            <div style="padding :5px 0 0 10px;float:left;">
+                                                {{node['db_dir']}}
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                            <div style="height:28px;float:left;text-align: right; width: 160px;padding:5px 10px 0px 0;font-weight:bold; border-right:solid 1px #cccccc">
+                                                Log file
+                                            </div>
+                                            <div style="padding :5px 0 0 10px;float:left;">
+                                                {{node['log_file']}}
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                            <div style="height:28px;float:left;text-align: right; width: 160px;padding:5px 10px 0px 0;font-weight:bold;border-right:solid 1px #cccccc">
+                                                SASL log file
+                                            </div>
+                                            <div style="padding :5px 0 0 10px;float:left;">
+                                                {{node['sasl_log_file']}}
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                        </div>
+                                        <div style="clear: both;"></div>
+                                        <div style="margin :10px 20px 5px 15px ;padding-bottom: 3px;border-bottom:solid 1px #cccccc;">Plugins</div>
+                                        <table class="table table-bordered table-hover " style="width: 600px;margin :10px 20px 5px 15px;">
+                                            <thead style="background-color: #eee; ">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Version</th>
+                                                <th>Description</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr data-ng-repeat="plugin in plugins">
+                                                <td>{{plugin.name}}</td>
+                                                <td>{{plugin.version}}</td>
+                                                <td>{{plugin.description}}</td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelFileDescriptors')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        File Descriptors
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelFileDescriptors" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="chartFileDescriptors" style="padding: 0 0 0 0;margin: 0 10px 0 0 ;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelSocketDescriptors')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        Socket Descriptors
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelSocketDescriptors" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="chartSocketDescriptors" style="padding: 0 0 0 0;margin: 0 10px 0 0 ;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelErlangProcesses')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        Erlang Processes
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelErlangProcesses" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="chartErlangProcesses" style="padding: 0 0 0 0;margin: 0 10px 0 0 ;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelMemory')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        Memory
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelMemory" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="chartMemory" style="padding: 0 0 0 0;margin: 0 10px 0 0 ;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelDiskSpace')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        Disk Space
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelDiskSpace" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="chartDiskSpace" style="padding: 0 0 0 0;margin: 0 10px 0 0 ;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelMnesiaTransactions')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        Mnesia Transactions
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelMnesiaTransactions" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="chartMnesiaTransactions" style="padding: 0 0 0 0;margin: 0 10px 0 0 ;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelPersistenceOperationsMsg')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        Persistence operations(messages)
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelPersistenceOperationsMsg" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="chartPersistenceOperationsMsg" style="padding: 0 0 0 0;margin: 0 10px 0 0 ;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelPersistenceOperationsBulk')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        Persistence operations(bulk)
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelPersistenceOperationsBulk" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="chartPersistenceOperationsBulk" style="padding: 0 0 0 0;margin: 0 10px 0 0 ;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelIOOperations')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        I/O operations
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelIOOperations" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="chartIOOperations" style="padding: 0 0 0 0;margin: 0 10px 0 0 ;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelIODataRates')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        I/O Data Rates
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelIODataRates" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="chartIODataRates" style="padding: 0 0 0 0;margin: 0 10px 0 0 ;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"  data-ng-click="toggle('panelIOAvgTimePerOperation')">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" >
+                                        I/O average time per operation
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="panelIOAvgTimePerOperation" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div id="chartIOAvgTimePerOperation" style="padding: 0 0 0 0;margin: 0 10px 0 0 ;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+</section>

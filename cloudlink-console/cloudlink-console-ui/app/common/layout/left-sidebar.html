@@ -1,0 +1,115 @@
+<aside class="main-sidebar">
+	<!-- sidebar: style can be found in sidebar.less -->
+	<section class="sidebar">
+		<!-- sidebar menu: : style can be found in sidebar.less -->
+		<ul class="sidebar-menu">
+			<li class="active treeview"><a href="#/home"> <i
+					class="fa fa-dashboard"></i> <span>Home</span></a></li>
+			<li class="treeview" data-ng-show="hasRole('ADMIN')">
+				<a href="#"> <i class="fa fa-laptop"></i>
+					<span>系统管理</span><i class="fa fa-angle-left pull-right"></i>
+				</a>
+				<ul class="treeview-menu">
+					<li ui-sref-active="active">
+    					<a ui-sref="app.user"><i class="fa fa-circle-o"></i>用户管理</a>
+    				</li>
+				</ul>
+			</li>
+			<li class="treeview" data-ng-show="hasRole('BASIC')">
+				<a href="#"> <i class="fa fa-files-o"></i>
+					<span>基础配置</span><i class="fa fa-angle-left pull-right"></i>
+				</a>
+				<ul class="treeview-menu">
+					<li ui-sref-active="active">
+    					<a ui-sref="app.area"><i class="fa fa-circle-o"></i>配置数据中心</a>
+    				</li>
+					<li ui-sref-active="active">
+    					<a ui-sref="app.apptype"><i class="fa fa-circle-o"></i>配置应用类型</a>
+    				</li>
+					<li ui-sref-active="active">
+    					<a ui-sref="app.appid"><i class="fa fa-circle-o"></i>配置AppId</a>
+    				</li>
+					<li ui-sref-active="active">
+    					<a ui-sref="app.appqueue"><i class="fa fa-circle-o"></i>配置指令、消息</a>
+    				</li>
+				</ul>
+			</li>
+			<li class="treeview" data-ng-show="hasRole('ALARM')">
+				<a href="#"> <i class="fa fa-pie-chart"></i>
+					<span>告警配置</span> <i class="fa fa-angle-left pull-right"></i>
+				</a>
+				<ul class="treeview-menu">
+					<li ui-sref-active="active">
+    					<a ui-sref="app.systemconfig"><i class="fa fa-circle-o"></i>默认参数配置</a>
+    				</li>
+					<li ui-sref-active="active">
+    					<a ui-sref="app.node_satus_alarm"><i class="fa fa-circle-o"></i>节点状态告警配置</a>
+    				</li>
+					<li ui-sref-active="active">
+    					<a ui-sref="app.node_work_status_alarm"><i class="fa fa-circle-o"></i>工作状态告警配置</a>
+    				</li>
+					<li ui-sref-active="active">
+    					<a ui-sref="app.connection_alarm"><i class="fa fa-circle-o"></i>Connection告警配置</a>
+    				</li>
+					<li ui-sref-active="active">
+    					<a ui-sref="app.exchange_alarm"><i class="fa fa-circle-o"></i>Exchange告警配置</a>
+    				</li>
+					<li ui-sref-active="active">
+    					<a ui-sref="app.queue_alarm"><i class="fa fa-circle-o"></i>Queue告警配置</a>
+    				</li>
+					<li ui-sref-active="active">
+    					<a ui-sref="app.shovel_alarm"><i class="fa fa-circle-o"></i>Shovel告警配置</a>
+    				</li>
+				</ul>
+			</li>
+			<li class="treeview" data-ng-show="hasRole('MONITOR')">
+				<a href="#"> <i class="fa  fa-bar-chart"></i>
+					<span>云链监控</span> <i class="fa fa-angle-left pull-right"></i>
+				</a>
+				<ul class="treeview-menu">
+					<li ui-sref-active="active">
+						<a ui-sref="app.clusterStatus_monitor"><i class="fa fa-circle-o"></i>集群状态监控</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.connections_monitor"><i class="fa fa-circle-o"></i>Connections监控</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.channels_monitor"><i class="fa fa-circle-o"></i>Channels监控</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.exchanges_monitor"><i class="fa fa-circle-o"></i>Exchange监控</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.queues_monitor"><i class="fa fa-circle-o"></i>Queue监控</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.shovel_monitor"><i class="fa fa-circle-o"></i>Shovel监控</a>
+					</li>
+				</ul>
+			</li>
+			<li class="treeview" data-ng-show="hasRole('CONTROL')">
+				<a href="#"> <i class="fa fa-edit"></i>
+					<span>云链管理</span> <i class="fa fa-angle-left pull-right"></i>
+				</a>
+				<ul class="treeview-menu">
+					<li ui-sref-active="active">
+						<a ui-sref="app.exchange_control"><i class="fa fa-circle-o"></i>Exchange管理</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.queue_control"><i class="fa fa-circle-o"></i>Queue管理</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.shovel_control"><i class="fa fa-circle-o"></i>Shovel管理</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.appid_search"><i class="fa fa-circle-o"></i>AppID查询</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.command_search"><i class="fa fa-circle-o"></i>指令查询</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+	<!-- /.sidebar -->
+</aside>
