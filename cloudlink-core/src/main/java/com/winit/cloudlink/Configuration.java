@@ -16,12 +16,11 @@ import com.winit.cloudlink.registry.Registry;
  * @export
  */
 public class Configuration implements Serializable {
-
     private CloudlinkOptions cloudlinkOptions;
-    private Metadata         metadata;
-    private Cloudlink        cloudlink;
+    private Metadata metadata;
+    private Cloudlink cloudlink;
 
-    private Registry         registry;
+    private Registry registry;
 
     public Configuration configure() {
         return configure(new Properties());
@@ -47,6 +46,7 @@ public class Configuration implements Serializable {
         }
         Metadata metadata = Metadata.build(cloudlinkOptions);
         cloudlink = new DefaultCloudlink(metadata, registry);
+        cloudlink.start();
         return this;
     }
 

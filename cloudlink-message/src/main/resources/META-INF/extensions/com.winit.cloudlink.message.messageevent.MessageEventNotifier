@@ -1,0 +1,2 @@
+# message event notifier
+default=com.winit.cloudlink.message.messageevent.DefaultMessageEventNotifier

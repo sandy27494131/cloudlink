@@ -4,9 +4,11 @@ import com.winit.cloudlink.command.Command;
 import com.winit.cloudlink.command.CommandBuilder;
 import com.winit.cloudlink.command.CommandCallback;
 import com.winit.cloudlink.command.CommandExecutor;
-import com.winit.cloudlink.event.*;
-import com.winit.cloudlink.common.Lifecycle;
+import com.winit.cloudlink.common.Lifecycle2;
 import com.winit.cloudlink.config.Metadata;
+import com.winit.cloudlink.event.Event;
+import com.winit.cloudlink.event.EventBuilder;
+import com.winit.cloudlink.event.EventListener;
 import com.winit.cloudlink.message.Message;
 import com.winit.cloudlink.message.MessageBuilder;
 import com.winit.cloudlink.message.MessageMonitor;
@@ -16,7 +18,7 @@ import com.winit.cloudlink.message.handler.MessageHandler;
 /**
  * Created by stvli on 2015/11/12.
  */
-public interface Cloudlink extends Lifecycle {
+public interface Cloudlink extends Lifecycle2 {
 
     /**
      * 发送消息

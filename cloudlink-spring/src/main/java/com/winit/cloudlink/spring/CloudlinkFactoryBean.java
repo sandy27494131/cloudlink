@@ -1,7 +1,17 @@
 package com.winit.cloudlink.spring;
 
-import java.util.Properties;
-
+import com.winit.cloudlink.Cloudlink;
+import com.winit.cloudlink.CloudlinkSwitcher;
+import com.winit.cloudlink.Configuration;
+import com.winit.cloudlink.command.CommandCallback;
+import com.winit.cloudlink.command.CommandExecutor;
+import com.winit.cloudlink.common.utils.StringUtils;
+import com.winit.cloudlink.config.ApplicationOptions;
+import com.winit.cloudlink.config.Metadata;
+import com.winit.cloudlink.event.EventListener;
+import com.winit.cloudlink.message.MessageReturnedListener;
+import com.winit.cloudlink.message.handler.MessageHandler;
+import com.winit.cloudlink.spring.exception.CloudlinkConfigExcption;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.DisposableBean;
@@ -10,38 +20,34 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.EmbeddedValueResolverAware;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringValueResolver;
 
-import com.winit.cloudlink.Cloudlink;
-import com.winit.cloudlink.Configuration;
-import com.winit.cloudlink.command.CommandExecutor;
-import com.winit.cloudlink.command.CommandCallback;
-import com.winit.cloudlink.common.utils.StringUtils;
-import com.winit.cloudlink.config.Metadata;
-import com.winit.cloudlink.event.EventListener;
-import com.winit.cloudlink.message.MessageReturnedListener;
-import com.winit.cloudlink.message.handler.MessageHandler;
+import java.util.Properties;
 
-public class CloudlinkFactoryBean implements FactoryBean<Cloudlink>, DisposableBean, InitializingBean, BeanPostProcessor, ApplicationContextAware {
+public class CloudlinkFactoryBean implements FactoryBean<Cloudlink>, DisposableBean, InitializingBean, BeanPostProcessor, ApplicationContextAware, EmbeddedValueResolverAware {
 
-    private static final String     KEY_ENABLE_MESSAGE_LISTENER = "enableMessageListener";
+    private static final String KEY_ENABLE_MESSAGE_LISTENER = "enableMessageListener";
 
-    private ApplicationContext      ApplicationContext;
+    private ApplicationContext ApplicationContext;
 
-    private Cloudlink               cloudlink;
+    private Cloudlink cloudlink;
 
-    private String                  configLocation;
+    private String configLocation;
 
-    private Properties              cloudlinkProperties;
+    private Properties cloudlinkProperties;
 
-    private Configuration           configuration;
+    private Configuration configuration;
 
-    private boolean                 enableMessageListener       = true;
+    private boolean enableMessageListener = true;
 
     private MessageReturnedListener messageReturnedListener;
+
+    private StringValueResolver resolver;
 
     @Override
     public void setApplicationContext(ApplicationContext ApplicationContext) throws BeansException {
@@ -80,6 +86,19 @@ public class CloudlinkFactoryBean implements FactoryBean<Cloudlink>, DisposableB
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if (enableMessageListener) {
+            try {
+                String ccKey = ApplicationOptions.CONFIG_PERFIX + bean.getClass().getName();
+                String concurrentConsumers = resolver.resolveStringValue("${"+ ccKey + "}");
+                if (!StringUtils.isBlank(concurrentConsumers)) {
+                        cloudlink.getMetadata().getApplicationOptions().addConcurrentConsumers(ccKey, Integer.valueOf(concurrentConsumers));
+
+                }
+            } catch (NumberFormatException e) {
+                throw new CloudlinkConfigExcption("The cloudlink concurrency configuration can only be a positive integer, handler: " + bean.getClass().getName());
+            } catch (IllegalArgumentException e) {
+                // igonre 忽视并发参数未配置的异常
+            }
+
             if (bean instanceof MessageHandler) {
                 MessageHandler<?> messageHandler = (MessageHandler<?>) bean;
                 cloudlink.registerMessageHandler(messageHandler);
@@ -129,6 +148,7 @@ public class CloudlinkFactoryBean implements FactoryBean<Cloudlink>, DisposableB
         cloudlink = configuration.getCloudlink();
         cloudlink.setMessageReturnedListener(messageReturnedListener);
 
+        processUbarrier();
     }
 
     @Override
@@ -185,4 +205,23 @@ public class CloudlinkFactoryBean implements FactoryBean<Cloudlink>, DisposableB
         this.messageReturnedListener = messageReturnedListener;
     }
 
+    private void processUbarrier() {
+        if (isSupportUbarrier()) {
+            new CloudlinkSwitcher(cloudlink);
+        }
+    }
+
+    private boolean isSupportUbarrier() {
+        try {
+            Class.forName("com.winit.ubarrier.jmx.agent.Agent");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public void setEmbeddedValueResolver(StringValueResolver resolver) {
+        this.resolver = resolver;
+    }
 }

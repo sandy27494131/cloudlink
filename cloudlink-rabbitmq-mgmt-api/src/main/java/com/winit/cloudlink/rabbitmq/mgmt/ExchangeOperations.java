@@ -44,7 +44,7 @@ public class ExchangeOperations extends BaseFluent {
 		
 		logger.debug("Getting exchanges at from the default vhost.");
 		
-		return allOnVHost("/").get();
+		return allOnVHost(this.mgmtService.getVhost()).get();
 	}
 	
 	/**
@@ -67,7 +67,7 @@ public class ExchangeOperations extends BaseFluent {
 	 */
 	public Optional<Exchange> get(String name){
 		
-		return get("/", name);
+		return get(this.mgmtService.getVhost(), name);
 	}
 	
 	/**
@@ -94,7 +94,7 @@ public class ExchangeOperations extends BaseFluent {
 
     public ExchangeOperations publish(String exchangeName, Message message){
 
-        return this.publish("/", exchangeName, message);
+        return this.publish(this.mgmtService.getVhost(), exchangeName, message);
     }
 
     public ExchangeOperations publish(String vhost, String exchangeName, Message message){
@@ -108,7 +108,7 @@ public class ExchangeOperations extends BaseFluent {
 
     public Optional<PublishResponse> publishAndConfirm(String exchangeName, Message message){
 
-        return this.publishAndConfirm("/", exchangeName, message);
+        return this.publishAndConfirm(this.mgmtService.getVhost(), exchangeName, message);
     }
 
     public Optional<PublishResponse> publishAndConfirm(String vhost, String exchangeName, Message message){
@@ -120,7 +120,7 @@ public class ExchangeOperations extends BaseFluent {
 
     public ExchangeOperations delete(String name){
 
-        return this.delete("/", name);
+        return this.delete(this.mgmtService.getVhost(), name);
     }
 
 	public ExchangeOperations delete(String vhost, String name){
@@ -139,7 +139,7 @@ public class ExchangeOperations extends BaseFluent {
 	 */
 	public Optional<Collection<Binding>> downstreamBindings(String exchangeName){
 		
-		return downstreamBindings("/", exchangeName);
+		return downstreamBindings(this.mgmtService.getVhost(), exchangeName);
 	}
 	
 	/**
@@ -160,7 +160,7 @@ public class ExchangeOperations extends BaseFluent {
 	 */
 	public Optional<Collection<Binding>> upstreamBindings(String exchangeName){
 		
-		return upstreamBindings("/", exchangeName);
+		return upstreamBindings(this.mgmtService.getVhost(), exchangeName);
 	}
 	
 	/**

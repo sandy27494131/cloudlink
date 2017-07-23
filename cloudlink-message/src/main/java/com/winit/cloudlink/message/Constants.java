@@ -37,4 +37,36 @@ public class Constants extends com.winit.cloudlink.common.Constants {
     public static final String EVNET_RONTINGKEY_UNKNOW                    = "UNKNOW";
 
     public static final String EVENT_STATUS_SUFFIX                        = "STATUS";
+
+    /*********************************异常处理****************************************/
+
+    public static final String RETRY_KEY_FROM_APP                         = "fromApp";
+
+    public static final String RETRY_KEY_TO_APP                           = "toApp";
+
+    public static final String RETRY_KEY_MESSAGE_ID                       = "messageId";
+
+    public static final String RETRY_KEY_SOURCE_ID                        = "sourceId";
+
+    public static final String RETRY_KEY_RETRY_ID                         = "retryId";
+
+    public static final String RETRY_KEY_RETRY_TIMES                      = "retryTimes";
+
+    public static final String RETRY_KEY_SEND_TIME                        = "sendTime";
+
+    public static final String RETRY_KEY_EXCEPT_TIME                      = "exceptTime";
+
+    public static final String RETRY_KEY_MESSAGE_TYPE                     = "messageType";
+
+    public static final String RETRY_KEY_MESSAGE_CATEGORY                 = "messageCategory";
+
+    public static final String RETRY_KEY_PAYLOAD                          = "payload";
+
+    public static final String RETRY_KEY_EXCEPTION                        = "exception";
+
+    public static final String RETRY_REQUEST_MESSAGE_TYPE                 = "RETRY_REQUEST";
+
+
+
+    /*********************************异常处理****************************************/
 }

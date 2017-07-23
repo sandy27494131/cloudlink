@@ -157,7 +157,7 @@ angular.module('app').controller('queueCtrl', ['$scope', '$translate', '$localSt
          */
         $scope.queryAllQueues = function() {
             HttpUtil.ajax({
-                url : "/api/queues",
+                url : "/api/queuealarm/configs",
                 data : $scope.queryCondition,
                 method : "GET",
                 loadingButton:"btnQuery",
@@ -194,7 +194,8 @@ angular.module('app').controller('queueCtrl', ['$scope', '$translate', '$localSt
                 resolve : {
                     params : function() {
                         return {
-                            queueName : queueName
+                            queueName : queueName,
+                            isUpdate : isUpdate
                         };
                     }
                 }
@@ -206,6 +207,62 @@ angular.module('app').controller('queueCtrl', ['$scope', '$translate', '$localSt
                     $scope.queryAllQueues();
             });
         };
+
+        $scope.deleteQueueAlarm = function(queueName, event) {
+            if (confirm("确认删除【"+queueName+"】的告警配置吗？")) {
+                HttpUtil.ajax({
+                    url : "/api/queuealarm/" + queueName,
+                    data : {},
+                    method : "DELETE",
+                    loadingButton:event.target.id,
+                    success : function(result) {
+                        if (result.errorCode == 0) {
+                            alert('操作成功');
+                            $scope.queryAllQueues();
+                        } else {
+                            alert(result.errorMsg);
+                        }
+                    }
+                });
+            }
+        }
+
+        $scope.split = function(str) {
+            if (str) {
+                var arr = str.split(",");
+
+                for (var i = arr.length-1 ; i >= 0 ; i--) {
+                    for (var j = i-1 ; j >= 0 ; j--) {
+                        if (arr[i] == arr[j]) {
+                            arr.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+                return arr;
+            }
+            return [];
+        };
+
+        $scope.waySort = function (ways) {
+            var alarmWay=[];
+            try {
+                alarmWay = ways.join(",").split(",");
+            } catch (e) {
+
+            }
+            var data = ['EMAIL', 'SMS'];
+            for (var i = 0 ; i < data.length ; i++) {
+                for (var j = 0 ; j < alarmWay.length ; j++) {
+                    if (data[i] == alarmWay[j]) {
+                        var temp = data[j];
+                        data[j] = data[i];
+                        data[i] = temp;
+                    }
+                }
+            }
+            return data;
+        };
     }]);
 
 /**
@@ -214,30 +271,34 @@ angular.module('app').controller('queueCtrl', ['$scope', '$translate', '$localSt
 angular.module('app').controller('appQueueEditCtrl', ['$scope', '$translate', '$localStorage', 'HttpUtil','$modalInstance', 'params',
     function($scope,$translate,$localStorage,HttpUtil,$modalInstance,params ) {
         $scope.queueName = params.queueName;
-        $scope.data = {};
-        var action = "PUT";
+        $scope.data = {maxMsg:0, emails:['']};
+        $scope.isUpdate = params.isUpdate;
+        var action = params.isUpdate ? "PUT" : "POST";
 
-        HttpUtil.ajax({
-            url : "/api/queue/" + $scope.queueName,
-            data : null,
-            method : "GET",
-            success : function(result) {
-                $scope.$apply(function(){
-                    if (result.errorCode == 0) {
-                        $scope.data = result.data.queue;
-                        if(!$scope.data.maxMsg || $scope.data.maxMsg==null)$scope.data.maxMsg=0;
-                        if(!$scope.data.emails || $scope.data.emails==null || $scope.data.emails.length==0){
-                            $scope.data.emails=new Array();
-                            $scope.data.emails.push('');
+        if ($scope.queueName) {
+            HttpUtil.ajax({
+                url : "/api/queuealarm/" + $scope.queueName,
+                data : null,
+                method : "GET",
+                success : function(result) {
+                    $scope.$apply(function(){
+                        if (result.errorCode == 0) {
+                            $scope.data = result.data;
+                            if(!$scope.data.maxMsg || $scope.data.maxMsg==null)$scope.data.maxMsg=0;
+                            if(!$scope.data.emails || $scope.data.emails==null || $scope.data.emails.length==0){
+                                $scope.data.emails=new Array();
+                                $scope.data.emails.push('');
+                            }
+                        } else {
+                            alert(result.errorMsg);
+                            $modalInstance.close(true);
                         }
-                    } else {
-                        alert(result.errorMsg);
-                        $modalInstance.close(true);
-                    }
 
-                });
-            }
-        });
+                    });
+                }
+            });
+        }
+
 
         $scope.save=function(valid){
             if (valid) { /*表单验证通过*/
@@ -248,17 +309,17 @@ angular.module('app').controller('appQueueEditCtrl', ['$scope', '$translate', '$
                     }
                 }
                 HttpUtil.ajax({
-                    url : "/api/queue/" + $scope.data.name,
+                    url : "/api/queuealarm/" + $scope.data.name,
                     data : $scope.data,
                     method : action,
                     loadingButton:"btnSave1",
                     success : function(data) {
                         if (data.errorCode == 0) {
                             alert('操作成功');
-                            $modalInstance.close(true);
                         } else {
                             alert(data.errorMsg);
                         }
+                        $modalInstance.close(true);
                     }
                 });
             }

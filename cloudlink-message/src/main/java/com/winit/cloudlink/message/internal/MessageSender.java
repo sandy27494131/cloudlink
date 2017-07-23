@@ -1,5 +1,7 @@
 package com.winit.cloudlink.message.internal;
 
+import com.winit.cloudlink.common.Clearable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by stvli on 2015/11/7.
  */
-public class MessageSender {
+public class MessageSender implements Clearable {
     private Map<String, List<String>> messageConsumers = new ConcurrentHashMap<String, List<String>>();
 
     public void addMessageConsumer(String messageType, String consumer) {
@@ -22,5 +24,10 @@ public class MessageSender {
 
     public List<String> getMessageConsumers(String messageType) {
         return messageConsumers.get(messageType);
+    }
+
+    @Override
+    public void clear() {
+        messageConsumers.clear();
     }
 }

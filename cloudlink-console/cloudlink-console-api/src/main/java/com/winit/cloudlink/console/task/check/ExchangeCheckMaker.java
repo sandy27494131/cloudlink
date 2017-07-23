@@ -32,7 +32,7 @@ public class ExchangeCheckMaker {
                 if (service == null) {
                     continue;
                 }
-                Collection<Exchange> exchanges = service.exchanges().all();
+                Collection<Exchange> exchanges = service.exchanges().allOnDefault();
                 for (Exchange e : exchanges) {
                     if (e.getName().equals(Constants.EXCHANGE_WINIT_SEND)) exchangeCheck.setWinitSend(e);
                     if (e.getName().equals(Constants.EXCHANGE_WINIT_RECEIVE)) exchangeCheck.setWinitReceive(e);

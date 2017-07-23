@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.winit</groupId>
     <artifactId>cloudlink-storage</artifactId>
-    <version>1.2.1-SNAPSHOT</version>
+      <version>1.5.0-SNAPSHOT</version>
   </parent>
   <artifactId>cloudlink-storage-api</artifactId>
   <dependencies>

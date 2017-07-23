@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!-- 文件输出格式 -->
+    <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 文件路径 -->
+        <file>cloudlink-robot.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 文件名称 -->
+            <fileNamePattern>cloudlink-robot.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 文件最大保存历史数量 -->
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${PATTERN}</pattern>
+        </layout>
+    </appender>
+
+
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <!-- CNR消息数据 -->
+    <property name="DATA_PATTERN_CNR" value="%msg%n"/>
+    <appender name="DATA_FILE_CNR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 文件路径 -->
+        <file>cloudlink-robot-data-CNR.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 文件名称 -->
+            <fileNamePattern>cloudlink-robot-data-CNR.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 文件最大保存历史数量 -->
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${DATA_PATTERN_CNR}</pattern>
+        </layout>
+    </appender>
+    <logger name="robot-data-CNR" level="INFO">
+        <appender-ref ref="DATA_FILE_CNR"/>
+    </logger>
+
+    <!-- USR消息数据 -->
+    <property name="DATA_PATTERN_USR" value="%msg%n"/>
+    <appender name="DATA_FILE_USR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 文件路径 -->
+        <file>cloudlink-robot-data-USR.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 文件名称 -->
+            <fileNamePattern>cloudlink-robot-data-USR.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 文件最大保存历史数量 -->
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${DATA_PATTERN_USR}</pattern>
+        </layout>
+    </appender>
+    <logger name="robot-data-USR" level="INFO">
+        <appender-ref ref="DATA_FILE_USR"/>
+    </logger>
+
+    <!-- EUR消息数据 -->
+    <property name="DATA_PATTERN_EUR" value="%msg%n"/>
+    <appender name="DATA_FILE_EUR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 文件路径 -->
+        <file>cloudlink-robot-data-EUR.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 文件名称 -->
+            <fileNamePattern>cloudlink-robot-data-EUR.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 文件最大保存历史数量 -->
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${DATA_PATTERN_EUR}</pattern>
+        </layout>
+    </appender>
+    <logger name="robot-data-EUR" level="INFO">
+        <appender-ref ref="DATA_FILE_EUR"/>
+    </logger>
+
+    <!-- AUR消息数据 -->
+    <property name="DATA_PATTERN_AUR" value="%msg%n"/>
+    <appender name="DATA_FILE_AUR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 文件路径 -->
+        <file>cloudlink-robot-data-AUR.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 文件名称 -->
+            <fileNamePattern>cloudlink-robot-data-AUR.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 文件最大保存历史数量 -->
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        AUR
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${DATA_PATTERN_AUR}</pattern>
+        </layout>
+    </appender>
+    <logger name="robot-data-AUR" level="INFO">
+        <appender-ref ref="DATA_FILE_AUR"/>
+    </logger>
+</configuration>

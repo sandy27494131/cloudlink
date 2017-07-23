@@ -4,7 +4,7 @@
     <parent>
         <artifactId>cloudlink-parent</artifactId>
         <groupId>com.winit</groupId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.5.0-SNAPSHOT</version>
     </parent>
     <artifactId>cloudlink-spring</artifactId>
     <packaging>jar</packaging>
@@ -40,6 +40,11 @@
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.winit</groupId>
+            <artifactId>cloudlink-ubarrier</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <scope>provided</scope>
@@ -47,6 +52,11 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
             <scope>provided</scope>
         </dependency>
     </dependencies>

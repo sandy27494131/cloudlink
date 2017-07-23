@@ -7,7 +7,7 @@ public interface Compress {
 
     /**
      * 压缩
-     * 
+     *
      * @param data 待压缩数据
      * @return byte[] 压缩后的数据
      */
@@ -15,7 +15,7 @@ public interface Compress {
 
     /**
      * 解压缩
-     * 
+     *
      * @param data 待压缩的数据
      * @return byte[] 解压缩后的数据
      */
@@ -23,7 +23,7 @@ public interface Compress {
 
     /**
      * 压缩类型
-     * 
+     *
      * @version <pre>
      * Author	Version		Date		Changes
      * jianke.zhang 	1.0  		2015年12月9日 	Created
@@ -32,7 +32,7 @@ public interface Compress {
      * @since 1.
      */
     public enum CompressCodec {
-        ZLIB, GZIB, NONE;
+        ZLIB, GZIP, NONE;
 
         public static CompressCodec nameOf(String name) {
             if (StringUtils.isBlank(name)) {
@@ -42,8 +42,8 @@ public interface Compress {
             String compressCodec = String.valueOf(name.toUpperCase());
             if (CompressCodec.ZLIB.name().equals(compressCodec)) {
                 return CompressCodec.ZLIB;
-            } else if (CompressCodec.GZIB.name().equals(compressCodec)) {
-                return CompressCodec.GZIB;
+            } else if (CompressCodec.GZIP.name().equals(compressCodec)) {
+                return CompressCodec.GZIP;
             } else {
                 return CompressCodec.NONE;
             }

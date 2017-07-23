@@ -3,10 +3,10 @@
     <parent>
         <groupId>com.winit</groupId>
         <artifactId>winit-parent</artifactId>
-        <version>1.3.0-SNAPSHOT</version>
+        <version>1.4.0.RELEASE</version>
     </parent>
     <artifactId>cloudlink-parent</artifactId>
-    <version>1.2.1-SNAPSHOT</version>
+    <version>1.5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <properties>
         <skip_maven_deploy>false</skip_maven_deploy>
@@ -25,8 +25,10 @@
 		<module>cloudlink-core</module>
         <module>cloudlink-rabbitmq-mgmt-api</module>
         <module>cloudlink-console</module>
-        <module>cloudlink-demo</module>
         <module>cloudlink-benchmark</module>
+        <module>cloudlink-ubarrier</module>
+        <module>cloudlink-demo</module>
+        <module>cloudlink-robot</module>
         <module>cloudlink</module>
     </modules>
     <profiles>

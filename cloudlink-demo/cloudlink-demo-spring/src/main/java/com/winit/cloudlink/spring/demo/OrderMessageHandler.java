@@ -1,5 +1,6 @@
 package com.winit.cloudlink.spring.demo;
 
+import com.winit.cloudlink.common.annotation.ConcurrentConsumers;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import com.winit.cloudlink.message.handler.MessageHandler;
 
 @Service
 @Lazy(false)
+@ConcurrentConsumers(2)
 public class OrderMessageHandler implements MessageHandler<Message<OrderCreateInfo>> {
 
     @Override

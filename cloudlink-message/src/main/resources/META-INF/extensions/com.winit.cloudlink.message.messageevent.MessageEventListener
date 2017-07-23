@@ -1,0 +1,2 @@
+# message event listener
+log=com.winit.cloudlink.message.messageevent.LogMessageEventListener

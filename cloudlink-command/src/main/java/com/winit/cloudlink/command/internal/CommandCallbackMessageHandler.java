@@ -1,5 +1,8 @@
 package com.winit.cloudlink.command.internal;
 
+import com.winit.cloudlink.common.MessageCategory;
+import com.winit.cloudlink.message.MessageEngine;
+import com.winit.cloudlink.message.exception.RetryableHandlerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,8 +25,9 @@ public class CommandCallbackMessageHandler<C extends Command<?>> extends Abstrac
 
     private Metadata            metadata;
 
-    public CommandCallbackMessageHandler(CommandCallback<C> commandCallback, Metadata metadata){
-        super(commandCallback.getClass(), metadata);
+    public CommandCallbackMessageHandler(CommandCallback<C> commandCallback, MessageEngine messageEngine,
+                                         Metadata metadata){
+        super(commandCallback.getClass(), metadata, messageEngine);
         this.commandCallback = commandCallback;
         this.metadata = metadata;
     }
@@ -35,15 +39,18 @@ public class CommandCallbackMessageHandler<C extends Command<?>> extends Abstrac
 
     @Override
     public void process(Message<C> message) {
-        C object = message.getPayload();
-
         try {
+            C object = message.getPayload();
             commandCallback.onCallback(object);
         } catch (Throwable e) {
             String errorMsg = "Call [" + commandCallback.getClass().getName() + "] failed";
             logger.error(errorMsg, e);
             if (!isIgnoreException()) {
                 throw new CommandException(errorMsg, e);
+            } else {
+                if (e instanceof RetryableHandlerException) {
+                    retryHandler(message, MessageCategory.COMMAND_CALLBACK, e);
+                }
             }
         }
 

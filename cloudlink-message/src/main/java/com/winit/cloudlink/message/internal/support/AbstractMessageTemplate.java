@@ -28,12 +28,13 @@ public abstract class AbstractMessageTemplate implements MessageTemplate {
 
     public AbstractMessageTemplate(Metadata metadata) {
         this.metadata = metadata;
-        init();
+        //start();
     }
 
-    protected void init() {
+    public void start() {
         try {
             messageSender = buildMessageSender(metadata);
+
             messageReceiver = buildMessageReceiver(metadata);
         } catch (Exception e) {
             logger.error("MessageTemplate initialized error.", e);

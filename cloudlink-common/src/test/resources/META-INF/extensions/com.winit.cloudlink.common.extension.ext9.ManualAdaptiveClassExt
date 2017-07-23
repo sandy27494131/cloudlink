@@ -1,0 +1,5 @@
+# Adaptive Class, 名字现在是没有用处的
+*adaptive=com.winit.cloudlink.common.extension.ext9.impl.ManualAdaptive
+
+impl1=com.winit.cloudlink.common.extension.ext9.impl.ExtImpl1
+impl2=com.winit.cloudlink.common.extension.ext9.impl.ExtImpl2

@@ -47,6 +47,8 @@ public class AlarmConfig {
 
     private boolean             enabled      = false;
 
+    private String mobile;
+
     public AlarmConfig(){
     }
 
@@ -60,6 +62,19 @@ public class AlarmConfig {
         this.alarmEmail = alarmEmail;
         this.alarmSettings = alarmSettings;
         this.enabled = enabled;
+    }
+
+    public AlarmConfig(String alarmType, Set<String> area, String alarmCron, Set<String> alarmWay, String alarmEmail,
+                       Map<String, String> alarmSettings, boolean enabled, String mobile){
+        this.id = alarmType;
+        this.alarmType = alarmType;
+        this.area = area;
+        this.alarmCron = alarmCron;
+        this.alarmWay = alarmWay;
+        this.alarmEmail = alarmEmail;
+        this.alarmSettings = alarmSettings;
+        this.enabled = enabled;
+        this.mobile = mobile;
     }
 
     public String getId() {
@@ -126,6 +141,14 @@ public class AlarmConfig {
         this.alarmWay = alarmWay;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
     public AlarmConfigVo toAlarmConfigVo() {
         AlarmConfigVo alarmConfigVo = new AlarmConfigVo();
         alarmConfigVo.setId(this.getId());
@@ -133,6 +156,7 @@ public class AlarmConfig {
         alarmConfigVo.setAlarmEmail(this.getAlarmEmail());
         alarmConfigVo.setAlarmSettings(this.getAlarmSettings());
         alarmConfigVo.setAlarmType(this.getAlarmType());
+        alarmConfigVo.setMobile(this.getMobile());
         
         String[] tmp = null;
         if (null != this.getAlarmWay()) {
@@ -164,6 +188,7 @@ public class AlarmConfig {
         tmp.addAll(Arrays.asList(alarmConfigVo.getArea()));
         alarmConfig.setArea(tmp);
         alarmConfig.setEnabled(alarmConfigVo.isEnabled());
+        alarmConfig.setMobile(alarmConfigVo.getMobile());
         return alarmConfig;
     }
 }

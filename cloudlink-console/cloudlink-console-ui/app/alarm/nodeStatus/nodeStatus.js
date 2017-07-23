@@ -136,5 +136,25 @@ angular.module('app').controller('nodeStatusCtrl', ['$scope', '$translate', '$lo
         $scope.test=function(a,cb){
             alert($(cb).attr('area').code);
             alert($(cb).is(':checked'));$(cb).prop("checked", true);
-        }
+        };
+
+        $scope.waySort = function (ways) {
+            var alarmWay=[];
+            try {
+                alarmWay = ways.join(",").split(",");
+            } catch (e) {
+
+            }
+            var data = ['EMAIL', 'SMS'];
+            for (var i = 0 ; i < data.length ; i++) {
+                for (var j = 0 ; j < alarmWay.length ; j++) {
+                    if (data[i] == alarmWay[j]) {
+                        var temp = data[j];
+                        data[j] = data[i];
+                        data[i] = temp;
+                    }
+                }
+            }
+            return data;
+        };
     }]);

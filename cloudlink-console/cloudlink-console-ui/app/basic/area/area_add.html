@@ -46,7 +46,7 @@
 								style="width: 270px;" popover
 								popover-show="areaForm.mqWanAddr.$invalid"
 								popover-options='必填项，长度必须小于等于128；确认数据格式是否正确'
-								ng-pattern="/^amqp://(.)+:(.)+@(.)+:[1-9][0-9]{0,5}$/"
+								ng-pattern="/^amqp://(.)+:(.)+@(.)+:[1-9][0-9]{0,5}(/[a-zA-z0-9]*)?$/"
 								ng-maxlength='128' required>
 							<div class="input-group-addon"
 								style="width: 600px; text-align: left;">Shovel（Haproxy/ELB的外网地址）,格式：amqp://username:password@hostname:port</div>
@@ -61,7 +61,7 @@
 								placeholder="" style="width: 270px;" popover
 								popover-show="areaForm.mqMgmtAddr.$invalid"
 								popover-options='必填项，长度必须小于等于128；确认数据格式是否正确'
-								ng-pattern="/^http://(.)+:(.)+@(.)+:[1-9][0-9]{0,5}$/"
+								ng-pattern="/^http://(.)+:(.)+@(.)+:[1-9][0-9]{0,5}(/[a-zA-z0-9]*)?$/"
 								ng-maxlength='128' required>
 							<div class="input-group-addon"
 								style="width: 600px; text-align: left;">（集群中一台rabbitMq外网地址）,格式：http://username:password@hostname:port</div>

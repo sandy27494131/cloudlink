@@ -1,26 +1,29 @@
 package com.winit.cloudlink.common.compress;
 
+import com.winit.cloudlink.common.Constants;
+import com.winit.cloudlink.common.exception.CompressionException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-import com.winit.cloudlink.common.exception.CompressionException;
-
 public class ZLibCompress implements Compress {
+    private int level = Constants.DEFAULT_COMPRESSION;
 
     /**
      * 压缩
-     * 
+     *
      * @param data 待压缩数据
      * @return byte[] 压缩后的数据
      */
     @Override
+
     public byte[] compress(byte[] data) throws CompressionException {
         if (null == data) return null;
         byte[] output = new byte[0];
 
-        Deflater compresser = new Deflater(Deflater.DEFAULT_COMPRESSION, true);
+        Deflater compresser = new Deflater(level, true);
 
         compresser.reset();
         compresser.setInput(data);
@@ -49,7 +52,7 @@ public class ZLibCompress implements Compress {
 
     /**
      * 解压缩
-     * 
+     *
      * @param data 待压缩的数据
      * @return byte[] 解压缩后的数据
      */

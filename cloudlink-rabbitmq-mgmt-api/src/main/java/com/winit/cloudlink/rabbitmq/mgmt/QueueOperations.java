@@ -25,15 +25,14 @@ public class QueueOperations extends BaseFluent {
 	 * @return Collection of Queues
 	 */
 	public Collection<Queue> all(){
-		
 		return HTTP.GET("/queues", QUEUE_COLLECTION).get();
 	}
 	
-	public Collection<Queue> allOnDefault(String vhost){
+	public Collection<Queue> allOnDefault(){
 		
 		logger.debug("Getting queues at from the default vhost.");
 		
-		return allOnVHost("/").get();
+		return allOnVHost(this.mgmtService.getVhost()).get();
 	}
 	
 	public Optional<Collection<Queue>> allOnVHost(String vhost){
@@ -45,8 +44,8 @@ public class QueueOperations extends BaseFluent {
 	}
 	
 	public Optional<Queue> get(String queueName){
-		
-		return get("/", queueName);
+
+		return get(this.mgmtService.getVhost(), queueName);
 	}
 	
 	public Optional<Queue> get(String vhost, String queueName){
@@ -66,7 +65,7 @@ public class QueueOperations extends BaseFluent {
 	
 	public QueueOperations delete(String queueName){
 		
-		return delete("/", queueName);
+		return delete(this.mgmtService.getVhost(), queueName);
 	}
 	
 	public QueueOperations delete(String vhost, String queueName){
@@ -80,12 +79,12 @@ public class QueueOperations extends BaseFluent {
 
     public Optional<Collection<ReceivedMessage>> consume(String queueName){
 
-        return this.consume("/", queueName);
+        return this.consume(this.mgmtService.getVhost(), queueName);
     }
 
     public Optional<Collection<ReceivedMessage>> consume(String queueName, ConsumeOptions options){
 
-        return this.consume("/", queueName, options);
+        return this.consume(this.mgmtService.getVhost(), queueName, options);
     }
 
     public Optional<Collection<ReceivedMessage>> consume(String vhost, String queueName){
@@ -102,7 +101,7 @@ public class QueueOperations extends BaseFluent {
 	
 	public QueueOperations purge(String queueName){
 		
-		return this.purge("/", queueName);
+		return this.purge(this.mgmtService.getVhost(), queueName);
 	}
 	
 	public QueueOperations purge(String vhost, String queueName){
@@ -116,7 +115,7 @@ public class QueueOperations extends BaseFluent {
 	
 	public Optional<Collection<Binding>> bindings(String queueName){
 		
-		return bindings("/", queueName);
+		return bindings(this.mgmtService.getVhost(), queueName);
 	}
 	
 	public Optional<Collection<Binding>> bindings(String vhost, String queueName){

@@ -1,6 +1,7 @@
 package com.winit.cloudlink.message;
 
 import java.util.Map;
+import java.util.UUID;
 
 import com.google.common.collect.Maps;
 import com.winit.cloudlink.common.utils.StringUtils;
@@ -86,6 +87,7 @@ public class MessageBuilder extends CloudlinkBuilder<Message> {
         headers.put(MessageHeaders.KEY_FROM_APP, fromApp);
         headers.put(MessageHeaders.KEY_TO_APP, toApp);
         headers.put(MessageHeaders.KEY_MESSAGETYPE, messageType);
+        headers.put(MessageHeaders.KEY_MESSAGE_ID, UUID.randomUUID().toString());
         if (zones != null && zones.length > 0) {
             headers.put(MessageHeaders.KEY_ZONES, zones);
         }

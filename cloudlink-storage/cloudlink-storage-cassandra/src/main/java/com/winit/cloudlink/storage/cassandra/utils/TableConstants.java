@@ -27,4 +27,6 @@ public class TableConstants {
     public static final String TABLE_USER_PERMISSION = "cloudlink_user_permission"; // 用户表
 
     public static final String TABLE_MAIL            = "cloudlink_mail";           // 待发送邮件表
+
+    public static final String TABLE_QUEUE_ALARM     = "cloudlink_queue_alarm";     // 队列告警配置
 }

@@ -1,6 +1,7 @@
 package com.winit.cloudlink.message.internal.listener;
 
 import com.winit.cloudlink.config.Metadata;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.winit.cloudlink.message.Message;
@@ -39,5 +40,6 @@ public abstract class AbstractListenerContainer implements ListenerContainer {
 
     @Override
     public abstract void shutdown();
+
 
 }

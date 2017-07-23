@@ -4,7 +4,7 @@
     <parent>
         <artifactId>cloudlink-parent</artifactId>
         <groupId>com.winit</groupId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.5.0-SNAPSHOT</version>
     </parent>
     <artifactId>cloudlink-benchmark</artifactId>
     <name>${project.artifactId}</name>

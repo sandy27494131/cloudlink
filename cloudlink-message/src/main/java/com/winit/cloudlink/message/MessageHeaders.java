@@ -15,6 +15,11 @@ public class MessageHeaders extends org.springframework.messaging.MessageHeaders
     public static final String KEY_EXCHANGE_TYPE = "exchangeType";
     public static final String KEY_ROUTING_KEY   = "routingKey";
     public static final String KEY_ZONES         = "zones";
+    public static final String KEY_SOURCE_ID      = "sourceId";
+    public static final String KEY_RETRY_ID      = "retryId";
+    public static final String KEY_RETRY_TIMES   = "retryTimes";
+    public static final String KEY_TIMESTAMP     = "timestamp";
+
 
     public MessageHeaders(Map<String, Object> headers){
         super(headers);
@@ -50,5 +55,21 @@ public class MessageHeaders extends org.springframework.messaging.MessageHeaders
 
     public String getRoutingKey() {
         return (String) get(KEY_ROUTING_KEY);
+    }
+
+    public String getRetryId() {
+        return (String) get(KEY_RETRY_ID);
+    }
+
+    public String getSourceId() {
+        return (String) get(KEY_SOURCE_ID);
+    }
+
+    public Integer getKeyRetryTimes() {
+        return (Integer) get(KEY_RETRY_TIMES);
+    }
+
+    public Long getTimestamp() {
+        return (Long) get(KEY_TIMESTAMP);
     }
 }

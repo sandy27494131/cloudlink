@@ -72,7 +72,7 @@ public class DefaultCommandEngine implements CommandEngine {
     public <Payload extends Serializable> void registerCommandCallback(CommandCallback<Command<Payload>> commandCallback,
                                                                        final HandlerRegisterCallback callback) {
         CommandCallbackMessageHandler<Command<Payload>> messageHandler = new CommandCallbackMessageHandler<Command<Payload>>(commandCallback,
-            metadata);
+            this.messageEngine, metadata);
         messageEngine.register(messageHandler, new HandlerRegisterCallback() {
 
             @Override
@@ -87,7 +87,7 @@ public class DefaultCommandEngine implements CommandEngine {
     @Override
     public <Payload extends Serializable> void unRegisterCommandCallback(CommandCallback<Command<Payload>> commandCallback) {
         CommandCallbackMessageHandler<Command<Payload>> messageHandler = new CommandCallbackMessageHandler<Command<Payload>>(commandCallback,
-            metadata);
+                this.messageEngine, metadata);
         messageEngine.unregister(messageHandler);
     }
 

@@ -59,7 +59,7 @@ public class QueueCheckMaker {
                 if(mapQueues.keySet().contains(queueCheck.getAreaCode())){
                     queues=mapQueues.get(queueCheck.getAreaCode());
                 }else {
-                    queues=service.queues().all();
+                    queues=service.queues().allOnDefault();
                     mapQueues.put(queueCheck.getAreaCode(),queues);
                 }
                 for (Queue q : queues) {

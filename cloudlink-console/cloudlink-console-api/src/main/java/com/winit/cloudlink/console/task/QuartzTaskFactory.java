@@ -1,16 +1,13 @@
 package com.winit.cloudlink.console.task;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-import org.apache.commons.lang.StringUtils;
+import com.winit.cloudlink.console.sms.SmsSender;
+import com.winit.cloudlink.console.task.check.QueueAlarmCheckMaker;
+import com.winit.cloudlink.storage.api.manager.QueueAlarmManager;
+import com.winit.cloudlink.storage.api.vo.*;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -40,10 +37,6 @@ import com.winit.cloudlink.storage.api.constants.AlarmType;
 import com.winit.cloudlink.storage.api.manager.AlarmConfigManager;
 import com.winit.cloudlink.storage.api.manager.AppIdManager;
 import com.winit.cloudlink.storage.api.manager.AppQueueManager;
-import com.winit.cloudlink.storage.api.vo.AlarmConfigVo;
-import com.winit.cloudlink.storage.api.vo.AppIdVo;
-import com.winit.cloudlink.storage.api.vo.AppQueueVo;
-import com.winit.cloudlink.storage.api.vo.AreaVo;
 
 public class QuartzTaskFactory implements Job {
 
@@ -184,11 +177,11 @@ public class QuartzTaskFactory implements Job {
 
     private List<QueueCheck> executeQueueAlarm(AlarmConfigVo task) {
         AppIdManager appIdManager = applicationContext.getBean(AppIdManager.class);
-        AppQueueManager appQueueManager = applicationContext.getBean(AppQueueManager.class);
+        QueueAlarmManager queueAlarmManager = applicationContext.getBean(QueueAlarmManager.class);
         List<AppIdVo> lstAllAppId = appIdManager.findEnable();
-        List<AppQueueVo> lstAllAppQueue = appQueueManager.findAll();
-        QueueCheckMaker queueCheckMaker = applicationContext.getBean(QueueCheckMaker.class);
-        List<QueueCheck> lstQueueCheck = queueCheckMaker.check(task, lstAllAppId, lstAllAppQueue, true);
+        List<QueueAlarmVo> lstAllAppQueue = queueAlarmManager.findAll();
+        QueueAlarmCheckMaker queueAlarmCheckMaker = applicationContext.getBean(QueueAlarmCheckMaker.class);
+        List<QueueCheck> lstQueueCheck = queueAlarmCheckMaker.check(task, lstAllAppQueue, true);
         List<QueueCheck> errors = new ArrayList<QueueCheck>();
         for (QueueCheck queueCheck : lstQueueCheck) {
             if (queueCheck.isExceptional()) {
@@ -210,6 +203,10 @@ public class QuartzTaskFactory implements Job {
      * @param errors
      */
     private void sendEmailToHandler(List<QueueCheck> errors, AlarmConfigVo task) {
+
+        // 发送告警短信
+        sendSmsToHandler(errors, task);
+
         Set<String> emailAddrs = new HashSet<String>();
         for (QueueCheck queueCheck : errors) {
             if (queueCheck.getEmails() != null) emailAddrs.addAll(queueCheck.getEmails());
@@ -227,6 +224,34 @@ public class QuartzTaskFactory implements Job {
             Map model = new HashMap();
             model.put("info", errorsSend);
             mailHelper.sendWithTemplate(new String[] { emailAddr }, subject, templateName, model);
+        }
+    }
+
+    private void sendSmsToHandler(List<QueueCheck> errors, AlarmConfigVo task) {
+        if (ArrayUtils.contains(task.getAlarmWay(), AlarmConfigVo.ALARM_SMS)) {
+            String gmobile = task.getMobile();
+            Set<String> globalMobiles = new HashSet<String>();
+            if (StringUtils.isNotBlank(gmobile)) {
+                String[] arr = org.springframework.util.StringUtils.tokenizeToStringArray(gmobile, ",", true, true);
+                globalMobiles.addAll(Arrays.asList(arr));
+            }
+
+            Set<String> customMobiles = new HashSet<String>();
+            for (QueueCheck queueCheck : errors) {
+                customMobiles.addAll(queueCheck.getMobiles());
+            }
+
+            customMobiles.removeAll(globalMobiles);
+
+            for (String mobile : customMobiles) {
+                List<QueueCheck> errorsSend = new ArrayList<QueueCheck>();
+                for (QueueCheck queueCheck : errors) {
+                    if (queueCheck.getEmails() != null && queueCheck.getMobiles().contains(mobile)) {
+                        errorsSend.add(queueCheck);
+                    }
+                }
+                sendSMS(errorsSend.toString(), mobile);
+            }
         }
     }
 
@@ -316,6 +341,17 @@ public class QuartzTaskFactory implements Job {
      * @param model
      */
     private void sendAlarmMail(AlarmType alarmType, AlarmConfigVo task, Map<String, Object> model) {
+
+        if (ArrayUtils.contains(task.getAlarmWay(), AlarmConfigVo.ALARM_SMS)) {
+            String gmobile = task.getMobile();
+            if (StringUtils.isNotBlank(gmobile)) {
+                String[] mobiles = org.springframework.util.StringUtils.tokenizeToStringArray(gmobile, ",", true, true);
+                for (String mobile : mobiles) {
+                    sendSMS(model.get("info").toString(), mobile);
+                }
+            }
+        }
+
         MailHelper mailHelper = applicationContext.getBean(MailHelper.class);
         String templateName = VelocityTemplate.getTemplateNameByAlarmType(alarmType);
         String subject = getMailSubject(templateName);
@@ -360,6 +396,15 @@ public class QuartzTaskFactory implements Job {
 
     private String getMailSubject(String code) {
         return applicationContext.getMessage(code, null, LOCALE);
+    }
+
+    private void sendSMS(String content, String... to) {
+        try {
+            SmsSender smsSender = applicationContext.getBean(SmsSender.class);
+            smsSender.sendSms("MQ告警：" + content, to);
+        } catch (Throwable e) {
+            logger.error("send sms error.",  e);
+        }
     }
 
     public static void main(String[] args) {

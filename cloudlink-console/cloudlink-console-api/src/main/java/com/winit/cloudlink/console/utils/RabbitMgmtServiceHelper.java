@@ -66,6 +66,7 @@ public class RabbitMgmtServiceHelper {
             .host(url.getHost())
             .port(url.getPort())
             .credentials(url.getUsername(), url.getPassword())
+            .vhost(StringUtils.isNotBlank(url.getPath()) ? url.getPath() : "/")
             .build();
     }
 

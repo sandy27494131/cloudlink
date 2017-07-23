@@ -1,10 +1,16 @@
 package com.winit.cloudlink.message.internal.rabbitmq;
 
-import java.io.UnsupportedEncodingException;
-
+import com.alibaba.fastjson.JSON;
+import com.winit.cloudlink.common.utils.StringUtils;
+import com.winit.cloudlink.config.Metadata;
+import com.winit.cloudlink.config.MqServerOptions;
+import com.winit.cloudlink.message.*;
+import com.winit.cloudlink.message.exception.MessageSendException;
+import com.winit.cloudlink.message.exception.QueueNotFoundException;
 import com.winit.cloudlink.message.internal.mapping.MappingStrategy;
 import com.winit.cloudlink.message.internal.mapping.MappingStrategyFactory;
-
+import com.winit.cloudlink.message.internal.support.AbstractMessageTemplate;
+import com.winit.cloudlink.message.utils.QueueHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpConnectException;
@@ -17,46 +23,67 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate.ReturnCallback;
 import org.springframework.amqp.support.converter.MessageConverter;
 
-import com.alibaba.fastjson.JSON;
-import com.winit.cloudlink.common.utils.StringUtils;
-import com.winit.cloudlink.config.Metadata;
-import com.winit.cloudlink.config.MqServerOptions;
-import com.winit.cloudlink.message.CloudlinkMessageConverter;
-import com.winit.cloudlink.message.ExchangeType;
-import com.winit.cloudlink.message.Message;
-import com.winit.cloudlink.message.MessageHeaders;
-import com.winit.cloudlink.message.MessageReturnedListener;
-import com.winit.cloudlink.message.exception.MessageSendException;
-import com.winit.cloudlink.message.exception.QueueNotFoundException;
-import com.winit.cloudlink.message.internal.support.AbstractMessageTemplate;
-import com.winit.cloudlink.message.utils.QueueHelper;
+import java.io.UnsupportedEncodingException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RabbitmqMessageTemplate extends AbstractMessageTemplate {
 
-    private static final Logger     logger = LoggerFactory.getLogger(RabbitmqMessageTemplate.class);
+    private static final Logger logger = LoggerFactory.getLogger(RabbitmqMessageTemplate.class);
 
-    private ConnectionFactory       connectionFactory;
-    private RabbitAdmin             rabbitAdmin;
-    private MessageConverter        messageConverter;
+    private ConnectionFactory connectionFactory;
+    private RabbitAdmin rabbitAdmin;
+    private MessageConverter messageConverter;
     private MessageReturnedListener messageReturnedListener;
+    private AtomicBoolean actived = new AtomicBoolean(false);
 
-    public RabbitmqMessageTemplate(Metadata metadata){
+    public RabbitmqMessageTemplate(Metadata metadata) {
         super(metadata);
     }
 
     @Override
-    protected void init() {
-        messageConverter = new CloudlinkMessageConverter(metadata);
-        connectionFactory = buildConnectionFactory(metadata);
-        if (null == rabbitAdmin) {
-            rabbitAdmin = new RabbitAdmin(connectionFactory);
+    public void start() {
+        active();
+    }
+
+    @Override
+    public void active() {
+        if (!actived.getAndSet(true)) {
+            messageConverter = new CloudlinkMessageConverter(metadata);
+            connectionFactory = buildConnectionFactory(metadata);
+            if (null == rabbitAdmin) {
+                rabbitAdmin = new RabbitAdmin(connectionFactory);
+            }
         }
+    }
+
+    @Override
+    public void deactive() {
+        if (actived.getAndSet(false)) {
+            connectionFactory.clearConnectionListeners();
+            if (connectionFactory instanceof CachingConnectionFactory) {
+                ((CachingConnectionFactory) connectionFactory).destroy();
+            }
+        }
+    }
+
+    @Override
+    public void shutdown() {
+        if (messageSender != null) {
+            messageSender.clear();
+        }
+        if (messageReceiver != null) {
+            messageReceiver.clear();
+        }
+    }
+
+    public boolean isActived() {
+        return actived.get();
     }
 
     protected ConnectionFactory buildConnectionFactory(Metadata metadata) {
         MqServerOptions serverOptions = metadata.getCurrentZone().getMqServerOptions();
         CachingConnectionFactory rabbitConnectionFactory = new CachingConnectionFactory(serverOptions.getHost(),
-            serverOptions.getPort());
+                serverOptions.getPort());
         rabbitConnectionFactory.setVirtualHost(serverOptions.getVirtualHost());
         rabbitConnectionFactory.setUsername(serverOptions.getUsername());
         rabbitConnectionFactory.setPassword(serverOptions.getPassword());
@@ -71,8 +98,8 @@ public class RabbitmqMessageTemplate extends AbstractMessageTemplate {
         try {
             ExchangeType exchangeType = message.getHeaders().getExchageType();
             MappingStrategy mappingStrategy = MappingStrategyFactory.buildMappingStrategy(metadata,
-                connectionFactory,
-                exchangeType);
+                    connectionFactory,
+                    exchangeType);
             String exchangeName = mappingStrategy.getSendExchangeName(message);
             String routingKey = mappingStrategy.getSendRoutingKey(message);
             template.convertAndSend(exchangeName, routingKey, message);
@@ -100,19 +127,22 @@ public class RabbitmqMessageTemplate extends AbstractMessageTemplate {
 
     protected void preHandle(Message message) {
         MessageHeaders headers = (MessageHeaders) message.getHeaders();
-        String messageType = headers.getMessageType();
-        String toAppId = headers.getToApp();
-        ExchangeType exchangeType = headers.getExchageType();
-        String[] zones = headers.getZones();
-        boolean queueExists = QueueHelper.checkLocalQueueExists(rabbitAdmin, headers);
-        if (!queueExists) {
-            String errorMsg = String.format("Could not find the message receiving queue [exchangeType: %s, messageType: %s, toAppId: %s, zone: %s]",
-                exchangeType,
-                messageType,
-                toAppId,
-                StringUtils.join(zones, ","));
-            logger.error(errorMsg);
-            throw new QueueNotFoundException(errorMsg);
+        String retryId = headers.getRetryId();
+        if (metadata.getApplicationOptions().isValidDestinationExists() && StringUtils.isBlank(retryId)) {
+            String messageType = headers.getMessageType();
+            String toAppId = headers.getToApp();
+            ExchangeType exchangeType = headers.getExchageType();
+            String[] zones = headers.getZones();
+            boolean queueExists = QueueHelper.checkLocalQueueExists(rabbitAdmin, headers);
+            if (!queueExists) {
+                String errorMsg = String.format("Could not find the message receiving queue [exchangeType: %s, messageType: %s, toAppId: %s, zone: %s]",
+                        exchangeType,
+                        messageType,
+                        toAppId,
+                        StringUtils.join(zones, ","));
+                logger.error(errorMsg);
+                throw new QueueNotFoundException(errorMsg);
+            }
         }
     }
 
@@ -121,6 +151,7 @@ public class RabbitmqMessageTemplate extends AbstractMessageTemplate {
         rabbitTemplate.setMessageConverter(messageConverter);
         rabbitTemplate.setChannelTransacted(false);
         rabbitTemplate.setMandatory(true);
+
         rabbitTemplate.setReturnCallback(new ReturnCallback() {
 
             @Override
@@ -140,10 +171,10 @@ public class RabbitmqMessageTemplate extends AbstractMessageTemplate {
                     messageBody = message.getBody();
                 }
                 logger.error(String.format("returnedMessage: exchange: %s, routingKey: %s, messageProperties: %s, body: %s",
-                    exchange,
-                    routingKey,
-                    messageProperties,
-                    messageBody));
+                        exchange,
+                        routingKey,
+                        messageProperties,
+                        messageBody));
                 if (null != messageReturnedListener) {
                     messageReturnedListener.onReturned(message);
                 }

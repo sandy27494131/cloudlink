@@ -3,7 +3,7 @@
     <parent>
         <artifactId>cloudlink-parent</artifactId>
         <groupId>com.winit</groupId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.5.0-SNAPSHOT</version>
     </parent>
     <artifactId>cloudlink</artifactId>
     <packaging>jar</packaging>
@@ -17,6 +17,11 @@
         <dependency>
             <groupId>com.winit</groupId>
             <artifactId>cloudlink-spring</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.winit</groupId>
+            <artifactId>cloudlink-ubarrier</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
@@ -119,6 +124,7 @@
                                     <include>com.winit:cloudlink-appid-api</include>
                                     <include>com.winit:cloudlink-appid-file</include>
                                     <include>com.winit:cloudlink-event</include>
+                                    <include>com.winit:cloudlink-ubarrier</include>
                                 </includes>
                             </artifactSet>
                             <transformers>

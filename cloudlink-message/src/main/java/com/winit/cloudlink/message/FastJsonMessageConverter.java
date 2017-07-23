@@ -1,48 +1,68 @@
 package com.winit.cloudlink.message;
 
-import java.io.IOException;
-import java.util.UUID;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageProperties;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConversionException;
-import org.springframework.amqp.support.converter.MessageConverter;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.winit.cloudlink.common.compress.Compress.CompressCodec;
 import com.winit.cloudlink.common.compress.CompressFactory;
 import com.winit.cloudlink.common.compress.DefaultCompressFactory;
 import com.winit.cloudlink.common.exception.CompressionException;
+import com.winit.cloudlink.common.extension.ExtensionLoader;
+import com.winit.cloudlink.config.ApplicationOptions;
 import com.winit.cloudlink.config.Metadata;
+import com.winit.cloudlink.message.exception.MessageSizeTooLargeException;
+import com.winit.cloudlink.message.messageevent.ExceptionMessageEvent;
+import com.winit.cloudlink.message.messageevent.MessageEvent;
+import com.winit.cloudlink.message.messageevent.MessageEventNotifier;
+import com.winit.cloudlink.message.messageevent.MessageEventType;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageProperties;
+import org.springframework.amqp.support.converter.MessageConversionException;
+import org.springframework.amqp.support.converter.MessageConverter;
+
+import java.io.IOException;
+import java.util.UUID;
 
 /**
  * Created by stvli on 2015/11/19.
  */
 public class FastJsonMessageConverter implements MessageConverter {
 
-    private static final Log       log                     = LogFactory.getLog(Jackson2JsonMessageConverter.class);
+    private static final Log log = LogFactory.getLog(FastJsonMessageConverter.class);
 
-    public static final String     DEFAULT_CHARSET         = "UTF-8";
+    public static final String DEFAULT_CHARSET = "UTF-8";
 
-    public static final String     CONTEXT_ACCEPT_ENCODING = "Accept-Encoding";
+    public static final String CONTEXT_ACCEPT_ENCODING = "Accept-Encoding";
 
-    private static CompressFactory compressFactory         = new DefaultCompressFactory();
+    private static CompressFactory compressFactory = new DefaultCompressFactory();
 
-    private volatile String        defaultCharset          = DEFAULT_CHARSET;
-    private boolean                createMessageIds        = false;
+    private volatile String defaultCharset = DEFAULT_CHARSET;
+    private boolean createMessageIds = false;
+    private boolean messageSizeLimited = Constants.DEFAULT_MESSAGE_SIZE_LIMITED;
+    private int messageWarnBytes = Constants.DEFAULT_MESSAGE_WARN_BYTES;
+    private int messageMaxBytes = Constants.DEFAULT_MESSAGE_MAX_BYTES;
 
-    private CompressCodec          compressCodec           = CompressCodec.NONE;
+    private boolean compressEnabled = Constants.DEFAULT_COMPRESSION_ENABLED;
+    private CompressCodec compressCodec = Constants.DEFAULT_COMPRESSION_CODEC;
+    private int noncompressMaxByte = Constants.DEFAULT_NO_COMPRESSION_SIZE;
+    private MessageEventNotifier messageEventNotifier;
 
-    private int                    noncompressMaxByte      = 0;
+    public FastJsonMessageConverter(Metadata metadata) {
+        ApplicationOptions applicationOptions = metadata.getApplicationOptions();
+        messageSizeLimited = applicationOptions.isMessageSizeLimited();
+        messageWarnBytes = applicationOptions.getMessageWarnBytes();
+        messageMaxBytes = applicationOptions.getMessageMaxBytes();
 
-    public FastJsonMessageConverter(Metadata metadata){
-        compressCodec = metadata.getApplicationOptions().getCompressCodec();
-        noncompressMaxByte = metadata.getApplicationOptions().getNonCompressMaxByte();
+        compressCodec = applicationOptions.getCompressCodec();
+        noncompressMaxByte = applicationOptions.getNonCompressMaxBytes();
+        noncompressMaxByte = applicationOptions.getNonCompressMaxBytes();
         initializeJsonObjectMapper();
+        try {
+            messageEventNotifier = ExtensionLoader.getExtensionLoader(MessageEventNotifier.class).getDefaultExtension();
+        } catch (Throwable throwable) {
+            log.warn("The messageEventNotifier not found.");
+        }
     }
 
     /**
@@ -83,6 +103,7 @@ public class FastJsonMessageConverter implements MessageConverter {
      * Subclass and override to customize.
      */
     protected void initializeJsonObjectMapper() {
+        //ParserConfig.getGlobalInstance().addAccept("com.winit.");
     }
 
     @Override
@@ -98,7 +119,6 @@ public class FastJsonMessageConverter implements MessageConverter {
                 }
                 try {
                     byte[] body = decompressBytes(message.getBody(), properties);
-
                     content = convertBytesToObject(body, encoding);
                 } catch (IOException e) {
                     throw new MessageConversionException("Failed to convert Message content", e);
@@ -149,32 +169,45 @@ public class FastJsonMessageConverter implements MessageConverter {
 
     protected Message createMessage(Object objectToConvert,
                                     MessageProperties messageProperties) throws MessageConversionException {
-        byte[] bytes = null;
-        CompressCodec dataCompressCodec = null;
+
         try {
-            String jsonString = JSON.toJSONString(objectToConvert, SerializerFeature.WriteClassName);
-
-            bytes = jsonString.getBytes(getDefaultCharset());
-
-            // 大于伐值才进行压缩数据o
-            if (!CompressCodec.NONE.equals(compressCodec) && bytes.length > noncompressMaxByte) {
+            String jsonString = objectToConvert instanceof String ?
+                    (String) objectToConvert :
+                    JSON.toJSONString(objectToConvert, SerializerFeature.WriteClassName);
+            byte[] bytes = jsonString.getBytes(getDefaultCharset());
+            if (bytes != null && messageSizeLimited) {
+                String messageSummary = jsonString.substring(100);
+                if (bytes.length >= messageMaxBytes) {
+                    MessageSizeTooLargeException exception = new MessageSizeTooLargeException(String.format("This message is too large to exceed %d bytes and will be refused to send,message content:%s", messageMaxBytes, messageSummary));
+                    messageEventNotifier.notify(new ExceptionMessageEvent(MessageEventType.MESSAGE_SIZE_EXCEED, objectToConvert, exception));
+                    throw exception;
+                }
+                if (bytes.length >= messageWarnBytes) {
+                    messageEventNotifier.notify(new MessageEvent(MessageEventType.MESSAGE_SIZE_WARNING, "The message size exceeds the warning threshold,message content:" + messageSummary));
+                }
+            }
+            // 是否对消息体进行压缩
+            CompressCodec dataCompressCodec = null;
+            if (!compressEnabled || CompressCodec.NONE.equals(compressCodec) || bytes.length < noncompressMaxByte) {
+                dataCompressCodec = CompressCodec.NONE;
+            } else {
                 bytes = compressFactory.compress(compressCodec, bytes);
                 dataCompressCodec = compressCodec;
-            } else {
-                dataCompressCodec = CompressCodec.NONE;
             }
-
+            messageProperties.setHeader(CONTEXT_ACCEPT_ENCODING, dataCompressCodec.name());
+            messageProperties.setContentType(MessageProperties.CONTENT_TYPE_JSON);
+            messageProperties.setContentEncoding(getDefaultCharset());
+            if (bytes != null) {
+                messageProperties.setContentLength(bytes.length);
+            }
+            return new Message(bytes, messageProperties);
         } catch (IOException e) {
             throw new MessageConversionException("Failed to convert Message content", e);
         } catch (CompressionException e) {
             throw new MessageConversionException("Failed to compress data", e);
+        } catch (MessageSizeTooLargeException e) {
+            throw new MessageConversionException("Failed to compress data", e);
         }
-        messageProperties.setHeader(CONTEXT_ACCEPT_ENCODING, dataCompressCodec.name());
-        messageProperties.setContentType(MessageProperties.CONTENT_TYPE_JSON);
-        messageProperties.setContentEncoding(getDefaultCharset());
-        if (bytes != null) {
-            messageProperties.setContentLength(bytes.length);
-        }
-        return new Message(bytes, messageProperties);
+
     }
 }

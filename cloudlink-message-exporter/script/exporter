@@ -1,0 +1,42 @@
+#!/bin/sh
+
+basepath=$(cd `dirname $0`; pwd)
+
+echo $basepath
+
+JAVA_OPT='-server -Xms512m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=256m -XX:SurvivorRatio=4 -XX:ParallelGCThreads=4 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=15 -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSClassUnloadingEnabled -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10001 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.awt.headless=true'
+
+start(){
+ echo 'starting exporter......'
+ now=`date "+%Y%m%d%H%M%S"`
+ exec java $JAVA_OPT -jar $basepath/cloudlink-message-exporter.jar >/dev/null &
+ echo 'startup exporter success......'
+}
+
+stop(){
+ echo 'starting stop exporter......'
+ ps -ef|grep $basepath |grep java|awk '{print $2}'|while read pid
+ do
+    echo 'kill -9 ' $pid
+    kill -9 $pid
+ done
+ echo 'stop exporter success......'
+}
+
+case "$1" in
+start)
+start
+;;
+stop)
+stop
+;;
+restart)
+stop
+start
+;;
+*)
+printf 'Usage: %s {start|stop|restart}\n' "$prog"
+exit 1
+;;
+esac
+

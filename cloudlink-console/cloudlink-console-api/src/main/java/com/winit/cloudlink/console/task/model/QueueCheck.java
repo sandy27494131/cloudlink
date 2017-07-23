@@ -3,6 +3,7 @@ package com.winit.cloudlink.console.task.model;
 import com.winit.cloudlink.rabbitmq.mgmt.model.Queue;
 import org.apache.commons.lang.StringUtils;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +24,9 @@ public class QueueCheck {
     private long msgMax;
     private boolean needSecondCheck;
     private Set<String> emails;
+
+    private String mobile;
+    private Set<String> mobiles = new HashSet<String>();
 
     public Set<String> getEmails() {
         return emails;
@@ -154,6 +158,28 @@ public class QueueCheck {
         return msgMax;
     }
 
+    public String getMobile() {
+        return this.mobile;
+    }
+
+    public Set<String> getMobiles() {
+        return mobiles;
+    }
+
+    public void setMobiles(Set<String> mobiles) {
+        this.mobiles = mobiles;
+    }
+
+    public QueueCheck setMobile(String mobile) {
+        this.mobile = mobile;
+        this.mobiles.clear();
+        String[] arr = org.springframework.util.StringUtils.tokenizeToStringArray(this.mobile, ",", true, true);
+        if (null != arr && arr.length > 0) {
+            this.mobiles.addAll(Arrays.asList(arr));
+        }
+        return this;
+    }
+
     public QueueCheck setMsgMax(long msgMax) {
         this.msgMax = msgMax;
         return this;
@@ -194,5 +220,18 @@ public class QueueCheck {
         if(this.exist&&this.durable&& (!this.autoDelete) && this.consumed&& (!this.msgOver)){
             return false;
         }else return true;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(areaCode).append("/");
+        sb.append(queueName);
+        if (!consumed) {
+            sb.append("(消费异常, ");
+        } else {
+            sb.append("(");
+        }
+        sb.append("堆积：").append(msgAmount).append(")");
+        return sb.toString();
     }
 }

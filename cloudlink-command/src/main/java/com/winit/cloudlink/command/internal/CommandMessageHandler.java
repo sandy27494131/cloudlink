@@ -1,5 +1,7 @@
 package com.winit.cloudlink.command.internal;
 
+import com.winit.cloudlink.common.MessageCategory;
+import com.winit.cloudlink.message.exception.RetryableHandlerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +26,7 @@ public class CommandMessageHandler<C extends Command<?>> extends AbstractMessage
     private Metadata            metadata;
 
     public CommandMessageHandler(CommandExecutor<C> command, MessageEngine messageEngine, Metadata metadata){
-        super(command.getClass(), metadata);
+        super(command.getClass(), metadata, messageEngine);
         command.setMessageEngine(messageEngine);
         command.setMetadata(metadata);
         this.command = command;
@@ -46,6 +48,10 @@ public class CommandMessageHandler<C extends Command<?>> extends AbstractMessage
 
             if (!isIgnoreException()) {
                 throw new CommandException(errorMsg, e);
+            } else {
+                if (e instanceof RetryableHandlerException) {
+                    retryHandler(message, MessageCategory.COMMAND, e);
+                }
             }
         }
     }

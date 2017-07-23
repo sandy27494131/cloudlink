@@ -14,9 +14,8 @@ import com.winit.cloudlink.Cloudlink;
 import com.winit.cloudlink.command.Command;
 import com.winit.cloudlink.demo.core.PickupInfo;
 
-//@ContextConfiguration(locations = { "classpath*:applicationContext.xml" })
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@Transactional
+@ContextConfiguration(locations = { "classpath*:applicationContext.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)
 public class CloudlinkSpringTest {
 
     @Resource
@@ -27,14 +26,11 @@ public class CloudlinkSpringTest {
 
     }
 
-    @SuppressWarnings("unchecked")
-    //@Test
+    @Test
     public void testSpringDemo() {
 
-        assertEquals("OMS1.OMS.ALL.CNR", cloudlink.getMetadata().getApplicationOptions().getAppId2String());
-        // fail("Not yet implemented");
 
-        PickupInfo payload = new PickupInfo();
+        /*PickupInfo payload = new PickupInfo();
         payload.setArea("CN");
         Command<PickupInfo> command2CN = cloudlink.newCommandBuilder()
             .commandName(PickupInfo.COMMAND_NAME)
@@ -44,7 +40,13 @@ public class CloudlinkSpringTest {
             .build();
 
         // 发送指令 to CN
-        cloudlink.commitCommand(command2CN);
+        cloudlink.commitCommand(command2CN);*/
+
+        try {
+            Thread.sleep(Integer.MAX_VALUE);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }

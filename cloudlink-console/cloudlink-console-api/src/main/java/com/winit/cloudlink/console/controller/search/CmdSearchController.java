@@ -44,7 +44,7 @@ public class CmdSearchController {
                     RabbitMgmtService serviceTo=RabbitMgmtServiceHelper.getServiceByArea(strAreaTo);
                     RabbitMgmtService serviceFrom=RabbitMgmtServiceHelper.getServiceByArea(strAreaFrom);
                     if(serviceTo!=null && serviceFrom!=null){
-                        Collection<Queue> queues=serviceTo.queues().all();
+                        Collection<Queue> queues=serviceTo.queues().allOnDefault();
                         for(Queue q:queues){
                             String queueName=q.getName();
                             tmp=queueName.split("\\.");
@@ -75,7 +75,7 @@ public class CmdSearchController {
                                 data.add(cmdSearch);
                             }
                         }
-                        queues=serviceFrom.queues().all();
+                        queues=serviceFrom.queues().allOnDefault();
                         for(Queue q:queues){
                             String queueName=q.getName();
                             tmp=queueName.split("\\.");

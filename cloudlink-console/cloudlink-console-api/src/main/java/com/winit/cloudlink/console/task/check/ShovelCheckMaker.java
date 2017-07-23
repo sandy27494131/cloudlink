@@ -70,7 +70,7 @@ public class ShovelCheckMaker {
     public static void checkShovels(String areaCode, List<ShovelCheck> checks, Collection<ShovelLink> shovelLinks,
                                        Collection<ShovelStatus> shovelStatus) {
         RabbitMgmtService service = RabbitMgmtServiceHelper.getServiceByArea(areaCode);
-        Collection<Queue> queues = service.queues().all();
+        Collection<Queue> queues = service.queues().allOnDefault();
         ShovelCheck check = null;
         int idx = checks.size() - 1;
         for (int i = idx; i >= 0; i--) {

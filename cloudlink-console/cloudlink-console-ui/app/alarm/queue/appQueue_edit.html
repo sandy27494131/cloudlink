@@ -4,42 +4,47 @@
         <div class="panel-heading" align="center" style="font-weight: bold;">编辑指令告警配置</div>
         <div class="panel-body"   >
             <div class="form-group">
-                <label  class="col-sm-4 control-label  ">指令名</label>
+                <label  class="col-sm-4 control-label  ">队列名</label>
                 <div class="col-sm-4"   >
-                    <input  type="text"   class="form-control"  data-ng-model="data.name" ng-readonly="true">
+                    <input  type="text"   class="form-control"  data-ng-model="data.name" popover data-ng-disabled="isUpdate"
+                            popover-show="appQueueForm.name.$invalid"
+                            popover-options='必填项，长度必须小于等于128' ng-maxlength='128' required>
                 </div>
+                <label   class=" col-sm-4 control-label text-info" style="text-align: left;"><small>填写完整队列名,示例：PACKING_CMD.AUSYD.CWM.AU.AUR</small></label>
             </div>
-            <div class="form-group">
-                <label  class="col-sm-4 control-label  ">发送方</label>
+            <div class="form-group"   >
+                <label  class="col-sm-4 control-label  ">禁用</label>
                 <div class="col-sm-4"   >
-                    <input  type="text"   class="form-control"  data-ng-model="data.sender" ng-readonly="true">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"  data-ng-model="data.disabled"
+                                   ng-true-value="true"
+                                   ng-false-value="false"> 禁用此队列的告警
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label  class="col-sm-4 control-label  ">接收方</label>
-                <div class="col-sm-4"   >
-                    <input  type="text"   class="form-control"  data-ng-model="data.receiver" ng-readonly="true">
-                </div>
-            </div>
-            <div class="form-group">
-                <label  class="col-sm-4 control-label  ">类型</label>
-                <div class="col-sm-4"   >
-                    <input  type="text"   class="form-control"  data-ng-model="data.messageType" ng-readonly="true">
-                </div>
+                <label   class=" col-sm-4 control-label text-info" style="text-align: left;"><small>勾选表示不对此队列进行告警</small></label>
             </div>
             <div class="form-group">
                 <label  class="col-sm-4 control-label  ">描述</label>
                 <div class="col-sm-4"   >
-                    <input  type="text"   class="form-control"  data-ng-model="data.remark" ng-readonly="true">
+                    <input  type="text"   class="form-control"  data-ng-model="data.remark">
                 </div>
             </div>
             <div class="form-group">
                 <label  class="col-sm-4 control-label  ">消息堆积阈值</label>
                 <div class="col-sm-4"   >
                     <input  type="number"   class="form-control"  data-ng-model="data.maxMsg"
-                            placeholder="请输入消息堆积告警阈值"   max="10000" min="0"     required>
+                            placeholder="请输入消息堆积告警阈值"   max="100000" min="0"     required>
                 </div>
                 <label   class=" col-sm-4 control-label text-info" style="text-align: left;"><small>设置为0时默认使用全局配置</small></label>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-4 control-label  ">告警手机号码</label>
+                <div class="col-sm-4"   >
+                    <input  type="text"   class="form-control"  data-ng-model="data.mobile" maxlength="128">
+                </div>
+                <label   class=" col-sm-4 control-label text-info" style="text-align: left;"><small>多个以英文逗号分隔</small></label>
             </div>
             <div class="form-group item"  data-ng-repeat="email in data.emails track by $index">
                 <label  class="col-sm-4 control-label  ">Email({{$index+1}})</label>

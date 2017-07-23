@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class AlarmConfigVo {
 
+    public static final String ALARM_SMS = "SMS";
+
     @NotBlank
     @Length(min = 1, max = 32)
     private String              id;
@@ -27,6 +29,8 @@ public class AlarmConfigVo {
 
     private boolean             enabled = false;
 
+    private String mobile;
+
     private Map<String, String> alarmSettings;
 
     public AlarmConfigVo(){
@@ -42,6 +46,19 @@ public class AlarmConfigVo {
         this.alarmEmail = alarmEmail;
         this.alarmSettings = alarmSettings;
         this.enabled = enabled;
+    }
+
+    public AlarmConfigVo(String id, String alarmType, String[] area, String alarmCron, String[] alarmWay,
+                         String alarmEmail, Map<String, String> alarmSettings, boolean enabled, String mobile){
+        this.id = alarmType + id;
+        this.alarmType = alarmType;
+        this.area = area;
+        this.alarmCron = alarmCron;
+        this.alarmWay = alarmWay;
+        this.alarmEmail = alarmEmail;
+        this.alarmSettings = alarmSettings;
+        this.enabled = enabled;
+        this.mobile = mobile;
     }
 
     public String getId() {
@@ -108,4 +125,11 @@ public class AlarmConfigVo {
         this.alarmWay = alarmWay;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 }

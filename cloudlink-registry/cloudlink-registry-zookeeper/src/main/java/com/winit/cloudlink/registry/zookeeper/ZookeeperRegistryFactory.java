@@ -25,9 +25,7 @@ import com.winit.cloudlink.remoting.zookeeper.curator.CuratorZookeeperTransporte
  * ZookeeperRegistryFactory.
  */
 public class ZookeeperRegistryFactory extends AbstractRegistryFactory {
-
     private ZookeeperTransporter zookeeperTransporter;
-
     public void setZookeeperTransporter(ZookeeperTransporter zookeeperTransporter) {
         this.zookeeperTransporter = zookeeperTransporter;
     }
@@ -36,7 +34,6 @@ public class ZookeeperRegistryFactory extends AbstractRegistryFactory {
         if (null == zookeeperTransporter) {
             zookeeperTransporter = new CuratorZookeeperTransporter();
         }
-
         return new ZookeeperRegistry(url, zookeeperTransporter);
     }
 

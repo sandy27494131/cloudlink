@@ -55,7 +55,7 @@
                                 <label  class="col-sm-2 control-label  ">队列消息堆积告警阈值</label>
                                 <div class="col-sm-4"   >
                                     <input  type="number"   class="form-control"  data-ng-model="obj.alarmSettings.QUEUE_MESSAGE_AMOUNT_THRESHOLD  "
-                                            placeholder="请输入消息堆积告警阈值"   max="10000" min="0"  required>
+                                            placeholder="请输入消息堆积告警阈值"   max="100000" min="0"  required>
 
                                 </div>
                                 <label   class=" col-sm-4 control-label text-info" style="text-align: left;"><small>队列消息数量大于或等于此值时触发告警</small></label>
@@ -70,23 +70,26 @@
                                                    ng-false-value="'false'"     disabled> 启用
                                         </label>
                                     </div>
-                                    <!--<input  type="number"
-                                            class="form-control"  data-ng-model="obj.alarmSettings.QUEUE_MESSAGE_IS_CONSUMED "
-                                            placeholder="请输入channels告警阈值"  max="10000" min="0"     required>-->
-
                                 </div>
                                 <label   class=" col-sm-4 control-label text-info" style="text-align: left;"><small>勾选后若队列消息不正常被消费则触发告警</small></label>
                             </div>
                             <div class="form-group">
                                 <label  class="col-sm-2 control-label  ">告警方式</label>
-                                <div class="col-sm-4">
+                                <div class="col-sm-2" data-ng-repeat="item in waySort(obj.alarmWay)">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="alarmWay" data-ng-model="obj.alarmWay[0]" ng-true-value="'EMAIL'"
-                                                   ng-false-value="''"    disabled> Email
+                                            <input type="checkbox" name="alarmWay" data-ng-model="obj.alarmWay[$index]" ng-true-value="'{{item}}'"
+                                                   ng-false-value="''"> {{item}}
                                         </label>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group"   >
+                                <label  class="col-sm-2 control-label  ">手机号码</label>
+                                <div class="col-sm-4"   >
+                                    <input  type="text"   class="form-control"  data-ng-model="obj.mobile" placeholder="请输入手机号码">
+                                </div>
+                                <label   class=" col-sm-4 control-label text-info" style="text-align: left;"><small>接收短信的手机号码，多个以英文逗号分隔。</small></label>
                             </div>
                             <div class="form-group item"  data-ng-repeat="email in emails track by $index">
                                 <label  class="col-sm-2 control-label  ">Email({{$index+1}})</label>
@@ -112,8 +115,10 @@
                         <div class="row" style="margin-top:50px;">
                             <div class="panel-group" id="accordion">
                                 <div class="panel panel-info"  >
-                                    <div class="panel-heading"  data-ng-click="toggle('panelAppQueueList')">
-                                        <h4 class="panel-title">
+                                    <div class="panel-heading">
+                                        <button type="button" class="btn btn-danger btn-xs  pull-right"
+                                                data-ng-click="openEditDialog(null,false)">新增</button>
+                                        <h4 class="panel-title" style="margin-right: 100px;"  data-ng-click="toggle('panelAppQueueList')">
                                             <a data-toggle="collapse" data-parent="#accordion" >
                                                 指令列表
                                             </a>
@@ -137,24 +142,6 @@
                                                      style="width: 200px; float: left;margin-left:15px; ">
                                                     <input tabindex="1" type="text" class="form-control input-sm pull-left" style="width:200px;margin-right:10px;  display:inline;  " data-ng-model="strFil"  placeholder="全文索引" />
                                                 </div>
-                                                <div class="input-group  input-group-sm col-xs-3 col-md-3"
-                                                     style="width: 200px; float: left; ">
-                                                    <div class="input-group-btn">
-                                                        <button type="button" class="btn">发送方</button>
-                                                    </div>
-                                                    <!-- /btn-group -->
-                                                    <input type="text" class="form-control" tabindex="2"
-                                                           data-ng-model="queryCondition.sender">
-                                                </div>
-                                                <div class="input-group  input-group-sm col-xs-3 col-md-3"
-                                                     style="width: 200px; float: left;  ">
-                                                    <div class="input-group-btn">
-                                                        <button type="button" class="btn">接收方</button>
-                                                    </div>
-                                                    <!-- /btn-group -->
-                                                    <input type="text" class="form-control" tabindex="3"
-                                                           data-ng-model="queryCondition.receiver">
-                                                </div>
 
                                             </div>
                                             <table id="example1" class="table table-bordered table-striped" style="margin-top:10px;">
@@ -166,22 +153,13 @@
                                                         </a>
                                                     </th>
                                                     <th>
-                                                        <a href="javascript:void(0);" style="color:black; "   data-ng-click="sort('sender')">发送方
-                                                            <span class="glyphicon glyphicon-sort btn-xs"  ></span>
-                                                        </a>
-                                                    </th>
-                                                    <th>
-                                                        <a href="javascript:void(0);" style="color:black; "   data-ng-click="sort('receiver')">接收方
-                                                            <span class="glyphicon glyphicon-sort btn-xs"  ></span>
-                                                        </a>
-                                                    </th>
-                                                    <th>
-                                                        <a href="javascript:void(0);" style="color:black; "   data-ng-click="sort('messageType')">类型
-                                                            <span class="glyphicon glyphicon-sort btn-xs"  ></span>
-                                                        </a>
+                                                        禁用
                                                     </th>
                                                     <th>
                                                         告警邮箱
+                                                    </th>
+                                                    <th>
+                                                        告警手机号码
                                                     </th>
                                                     <th>
                                                         <a href="javascript:void(0);" style="color:black; "   data-ng-click="sort('maxMsg')">消息堆积阈值
@@ -194,19 +172,25 @@
                                                 <tbody>
                                                 <tr data-ng-repeat="item in datas | filter:strFil|filter:{receiver:queryCondition.receiver,sender:queryCondition.sender} | orderBy:orderName:ascOrDesc | limitTo:page.pageSize">
                                                     <td data-ng-bind="item.name"></td>
-                                                    <td data-ng-bind="item.sender"></td>
-                                                    <td data-ng-bind="item.receiver"></td>
-                                                    <td data-ng-bind="item.messageType"></td>
+                                                    <td data-ng-bind="item.disabled ? '是':'否'"></td>
                                                     <td  width="250px;">
                                                         <a href="javascript:void(0)" data-ng-click="showEmails($event)" data-ng-show="item.emails.length" >emails({{item.emails.length}})</a>
                                                         <div style="display: none; ">
                                                             <div   data-ng-repeat="email in item.emails">{{email}}<br></div>
                                                         </div>
                                                     </td>
+                                                    <td  width="250px;">
+                                                        <a href="javascript:void(0)" data-ng-click="showEmails($event)" data-ng-show="item.mobile.length > 0" >mobile({{split(item.mobile).length}})</a>
+                                                        <div style="display: none; ">
+                                                            <div  data-ng-repeat="mobile in split(item.mobile)">{{mobile}}<br></div>
+                                                        </div>
+                                                    </td>
                                                     <td data-ng-bind="item.maxMsg"></td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary btn-xs"
-                                                                data-ng-click="openEditDialog(item.name,true)">修改告警配置</button>
+                                                                data-ng-click="openEditDialog(item.name,true)">修改</button>
+                                                        <button type="button" class="btn btn-danger btn-xs" id="{{'btnDel-' + item.name}}"
+                                                                data-ng-click="deleteQueueAlarm(item.name, $event)">删除</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n"/>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/cloudlink-exporter.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/cloudlink-exporter.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <MaxHistory>100</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <property name="DATA_PATTERN" value="%msg%n"/>
+
+    <appender name="DATA_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/opt/cloudlink-message/AUR/CNR/cloudlink-message.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/opt/cloudlink-message/AUR/CNR/cloudlink-message_%d{yyyy-MM-dd-HH}.log</fileNamePattern>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${DATA_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <logger name="reporter-data" level="INFO" >
+        <appender-ref ref="DATA_FILE"/>
+    </logger>
+
+
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>

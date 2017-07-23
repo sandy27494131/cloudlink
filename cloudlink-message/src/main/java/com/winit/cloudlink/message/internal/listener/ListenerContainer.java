@@ -1,5 +1,6 @@
 package com.winit.cloudlink.message.internal.listener;
 
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.winit.cloudlink.common.Lifecycle;

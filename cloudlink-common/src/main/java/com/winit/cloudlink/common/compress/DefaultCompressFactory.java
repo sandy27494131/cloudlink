@@ -11,7 +11,7 @@ public class DefaultCompressFactory implements CompressFactory {
     private static Map<CompressCodec, Compress> compressMap = new HashMap<CompressCodec, Compress>();
 
     static {
-        compressMap.put(CompressCodec.GZIB, new GZipCompress());
+        compressMap.put(CompressCodec.GZIP, new GZipCompress());
         compressMap.put(CompressCodec.ZLIB, new ZLibCompress());
     }
 

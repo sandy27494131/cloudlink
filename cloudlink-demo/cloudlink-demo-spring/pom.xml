@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.winit</groupId>
 		<artifactId>cloudlink-demo</artifactId>
-		<version>1.2.1-SNAPSHOT</version>
+		<version>1.5.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>cloudlink-demo-spring</artifactId>
 	<packaging>war</packaging>
@@ -34,5 +34,31 @@
         	<groupId>org.springframework</groupId>
         	<artifactId>spring-beans</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<!-- war打包插件, 设定war包名称不带版本号 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>${project.artifactId}</warName>
+					<webResources>
+						<resource>
+							<directory>src/main/webapp</directory>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+			<!-- resources插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

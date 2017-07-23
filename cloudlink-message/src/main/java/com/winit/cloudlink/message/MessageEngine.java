@@ -1,13 +1,13 @@
 package com.winit.cloudlink.message;
 
-import com.winit.cloudlink.common.Lifecycle;
+import com.winit.cloudlink.common.Lifecycle2;
 import com.winit.cloudlink.message.handler.MessageHandler;
 import com.winit.cloudlink.message.handler.MessageHandler.HandlerType;
 
 /**
  * Created by stvli on 2015/11/10.
  */
-public interface MessageEngine extends Lifecycle {
+public interface MessageEngine extends Lifecycle2 {
 
     /**
      * 发送消息

@@ -44,7 +44,7 @@ public class AppIdSearchController {
                 for(String areaCode:arrAreas){
                     RabbitMgmtService service=RabbitMgmtServiceHelper.getServiceByArea(areaCode);
                     if(service==null)continue;
-                    Collection<Queue> queues=service.queues().all();
+                    Collection<Queue> queues=service.queues().allOnDefault();
                     for(Queue q:queues){
                         String queueName=q.getName();
                         String[] tmp=queueName.split("\\.");

@@ -1,5 +1,8 @@
 package com.winit.cloudlink.message.handler;
 
+import com.winit.cloudlink.common.MessageCategory;
+import com.winit.cloudlink.message.MessageEngine;
+import com.winit.cloudlink.message.exception.RetryableHandlerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -7,14 +10,15 @@ import com.winit.cloudlink.common.CloudlinkException;
 import com.winit.cloudlink.config.Metadata;
 import com.winit.cloudlink.message.Message;
 
+
 public class DefaultMessageHandler<M extends Message<?>> extends AbstractMessageHandler<M> {
 
     private static final Logger logger = LoggerFactory.getLogger(DefaultMessageHandler.class);
 
     private MessageHandler<M>   messageHandler;
 
-    public DefaultMessageHandler(MessageHandler<M> messageHandler, Metadata metadata){
-        super(messageHandler.getClass(), metadata);
+    public DefaultMessageHandler(MessageHandler<M> messageHandler, MessageEngine messageEngine, Metadata metadata){
+        super(messageHandler.getClass(), metadata, messageEngine);
         this.messageHandler = messageHandler;
     }
 
@@ -33,6 +37,10 @@ public class DefaultMessageHandler<M extends Message<?>> extends AbstractMessage
 
             if (!isIgnoreException()) {
                 throw new CloudlinkException(errorMsg, e);
+            } else {
+                if (e instanceof RetryableHandlerException) {
+                    retryHandler(message, MessageCategory.MESSAGE, e);
+                }
             }
         }
     }
